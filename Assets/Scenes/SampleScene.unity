@@ -338,16 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15d54ce17dad724b98b6e0b84ff55a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_vcamOwner: {fileID: 0}
-  pushDistance: 0
-  smoothTime: 0.35
-  inputDeadzone: 0.1
-  holdLastDirection: 1
-  restrictToDominantAxis: 0
-  _aimDirection: {x: 0, y: 0}
-  _currentOffset: {x: 0, y: 0}
-  _offsetVelocity: {x: 0, y: 0}
-  _lastNonZeroDir: {x: 1, y: 0}
 --- !u!1 &1475169905
 GameObject:
   m_ObjectHideFlags: 3
@@ -568,6 +558,7 @@ GameObject:
   - component: {fileID: 1604669856}
   - component: {fileID: 1604669855}
   - component: {fileID: 1604669857}
+  - component: {fileID: 1604669858}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -663,6 +654,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1604669858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604669854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b926b6f6f747c864092ef999ce308d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  range: 2
+  animator: {fileID: 1604669857}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
