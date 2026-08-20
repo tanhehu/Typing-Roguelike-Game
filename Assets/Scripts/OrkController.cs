@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class OrkController : EnemyController
 {
-
+    private void Start()
+    {
+        Debug.Log("Grok");
+    }
 }
