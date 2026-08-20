@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class OrkController : EnemyController
 {
-    private void Update()
-    {
-        base.Update();
-    }
+
 }

@@ -2,49 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MoveController
+public class PlayerController : AllCharacterController
 {
     private float inputX;
     private float inputY;
 
     private bool isIdle = true;
-    private bool isWalking = false;
-    private bool isFacingRight = true;
 
-    [Header("References")]
-    [SerializeField] private Animator animator;
-
-    private void Update()
+    public override void Update()
     {
-        Movement();
-        Flip();
-        Animation();
+        base.Update();
     }
 
-    private void Movement()
+    public override void Move()
     {
         inputX = Input.GetAxis("Horizontal");
         inputY = Input.GetAxis("Vertical");
         Direction = new Vector3(inputX, inputY, 0);
-        Direction.Normalize();
         base.Move(Direction);
     }
 
-    private void Flip()
+    public override void Flip()
     {
         if((isFacingRight && inputX < 0) || (!isFacingRight && inputX > 0))
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            isFacingRight = !isFacingRight;
+            base.Flip();
         }
     }
 
-    private void Animation()
+    public override void Attack()
+    {
+        base.Attack();
+    }
+
+    public override void Animation()
     {
         isWalking = inputX * inputX + inputY * inputY >= 0.25f;
         isIdle = !isWalking;
         animator.SetBool("Idle", isIdle);
         animator.SetBool("Walk", isWalking);
+        base.Animation();
     }
 }
 

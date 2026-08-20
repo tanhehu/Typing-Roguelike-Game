@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MoveController
+public class EnemyController : AllCharacterController
 {
     [SerializeField] private float range;
 
-    [Header("Reference")]
-    [SerializeField] private Animator animator;
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
 
-    public void Update()
+    public override void Update()
     {
-        base.Move(distance);
+        Direction = distance;
+        base.Update();
     }
 
-    public void Attack()
+    public override void Attack()
     {
-        
+        base.Attack();
+    }
+
+    public override void Flip()
+    {
+        if((distance.x > 0 && !isFacingRight) || (distance.x <= 0 && isFacingRight))
+        {
+            base.Flip();
+        }
     }
 }

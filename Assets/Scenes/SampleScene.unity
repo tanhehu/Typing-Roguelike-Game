@@ -259,7 +259,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1056440327}
   - component: {fileID: 1056440326}
-  - component: {fileID: 1056440328}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -326,18 +325,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.1500001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1056440328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056440325}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15d54ce17dad724b98b6e0b84ff55a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1475169905
 GameObject:
   m_ObjectHideFlags: 3
@@ -525,6 +512,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  isWalking: 0
+  isFacingRight: 1
+  isAttacking: 0
   animator: {fileID: 1548349631}
 --- !u!95 &1548349631
 Animator:
@@ -547,6 +537,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1556651679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556651680}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556651680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556651679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.74175596, y: 1.1382455, z: 0.04880449}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1604669854
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,9 +687,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b926b6f6f747c864092ef999ce308d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  range: 2
+  speed: 1
+  isWalking: 0
+  isFacingRight: 1
+  isAttacking: 0
   animator: {fileID: 1604669857}
+  range: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -677,3 +701,4 @@ SceneRoots:
   - {fileID: 1548349628}
   - {fileID: 1056440327}
   - {fileID: 1604669856}
+  - {fileID: 1556651680}
