@@ -9,6 +9,10 @@ public class PlayerController : AllCharacterController
 
     private bool isIdle = true;
 
+    private void Start()
+    {
+
+    }
     public override void Update()
     {
         base.Update();
