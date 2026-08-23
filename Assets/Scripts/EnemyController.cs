@@ -1,31 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyController : AllCharacterController
 {
     [SerializeField] private float range;
-    [SerializeField] private Image wordPrefab; 
+    public float damage;
 
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
 
-    private void Start()
+    public override void Start()
     {
-        SpawnWord();
+        base.Start();
+        word.character = this;
     }
 
     public override void Update()
     {
-        Direction = distance;
         base.Update();
     }
 
+    #region Base
+    public override void Move()
+    {
+        Direction = distance;
+        base.Move();
+    }
     public override void Attack()
     {
-        base.Attack();
+        if(distance.magnitude <= range)
+        {
+            isAttacking = true;
+            base.Attack();
+        }
+        else
+        {
+            isAttacking = false;
+        }
     }
 
     public override void Flip()
@@ -36,24 +49,31 @@ public class EnemyController : AllCharacterController
         }
     }
 
-    public void SpawnWord()
+    public override void Animation()
     {
-        Image image = CreateController.Instance.Create<Image>(wordPrefab);
-        foreach(var word in WordList.Instance.wordDictionary)
+        isWalking = distance.magnitude > range && !isAttacking;
+        base.Animation();
+    }
+
+    #endregion
+
+    public override void SpawnWord()
+    {
+        base.SpawnWord();
+        foreach (var word in WordList.Instance.wordDictionary)
         {
             if(word.Value)
             {
-                var text = image.transform.GetChild(0);
-                text.gameObject.GetComponent<Text>().text = word.Key;
+                this.word.text.text = word.Key;
                 WordList.Instance.wordDictionary[word.Key] = false;
                 break;
             }
         }
-        Debug.Log("Text");
     }
 
     public void DrawRange()
     {
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 

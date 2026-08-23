@@ -4,17 +4,27 @@ using UnityEngine;
 
 public abstract class AllCharacterController : MoveController
 {
+    public bool isIdle = true;
     public bool isWalking = false;
     public bool isFacingRight = true;
     public bool isAttacking = false;
 
     [Header("References")]
     [SerializeField] protected Animator animator;
+    [SerializeField] private WordController wordPrefab;
+    protected WordController word;
+    public Vector3 wordOffset;
+
+    public virtual void Start()
+    {
+        SpawnWord();
+    }
 
     public virtual void Update()
     {
         Move();
         Flip();
+        Attack();
         Animation();
     }
 
@@ -32,11 +42,26 @@ public abstract class AllCharacterController : MoveController
 
     public virtual void Attack()
     {
-
+        //isAttacking = true;
     }
 
     public virtual void Animation()
     {
-        //animator.SetBool("Attack", isAttacking);
+        isIdle = !isWalking && !isAttacking;
+        animator.SetBool("Idle", isIdle);
+        animator.SetBool("Walk", isWalking);
+        animator.SetBool("Attack", isAttacking);
     }
+
+    public virtual void SpawnWord()
+    {
+        word = CreateController.Instance.Create<WordController>(wordPrefab);
+        word.transform.SetParent(WordList.Instance.wordCanvas.transform, false);
+    }
+}
+
+public enum LayerMask
+{
+    Player = 6,
+    Enemy = 7,
 }

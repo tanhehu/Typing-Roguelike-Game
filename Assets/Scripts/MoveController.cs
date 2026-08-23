@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
+    private Vector3 direction;
     [Header("Move")]
     [SerializeField] private float speed;
-    private Vector3 direction;
 
     public Vector3 Direction
     {
