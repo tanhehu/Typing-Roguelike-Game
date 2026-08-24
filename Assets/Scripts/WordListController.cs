@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class WordListController : MonoBehaviour
 {
-    public Dictionary<string, bool> wordDictionary = new Dictionary<string, bool>();
+    public Dictionary<string, GameObject> wordDictionary = new Dictionary<string, GameObject>();
     public List<string> wordList = new List<string> { "Jack", "Tan", "Matthew" };
 
     public Canvas wordCanvas;
@@ -18,7 +18,7 @@ public class WordListController : MonoBehaviour
     {
         foreach(var word in wordList)
         {
-            wordDictionary.Add(word, true);
+            wordDictionary.Add(word, null);
         }
     }
 

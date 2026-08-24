@@ -53,6 +53,14 @@ public class EnemyController : AllCharacterController
     {
         isWalking = distance.magnitude > range && !isAttacking;
         base.Animation();
+        animator.SetBool("Death", isDying);
+    }
+
+    public virtual void OnDeath()
+    {
+        isDying = true;
+        word.character = null;
+        Destroy(this, 3);
     }
 
     #endregion
@@ -62,10 +70,10 @@ public class EnemyController : AllCharacterController
         base.SpawnWord();
         foreach (var word in WordList.Instance.wordDictionary)
         {
-            if(word.Value)
+            if(word.Value == null)
             {
                 this.word.text.text = word.Key;
-                WordList.Instance.wordDictionary[word.Key] = false;
+                WordList.Instance.wordDictionary[word.Key] = this.gameObject;
                 break;
             }
         }

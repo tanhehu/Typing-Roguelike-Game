@@ -8,6 +8,7 @@ public abstract class AllCharacterController : MoveController
     public bool isWalking = false;
     public bool isFacingRight = true;
     public bool isAttacking = false;
+    public bool isDying = false;
 
     [Header("References")]
     [SerializeField] protected Animator animator;
@@ -28,6 +29,7 @@ public abstract class AllCharacterController : MoveController
         Animation();
     }
 
+    #region Base
     public virtual void Move()
     {
         Direction.Normalize();
@@ -51,7 +53,10 @@ public abstract class AllCharacterController : MoveController
         animator.SetBool("Idle", isIdle);
         animator.SetBool("Walk", isWalking);
         animator.SetBool("Attack", isAttacking);
+        //animator.SetBool("Death", isDying);
     }
+
+    #endregion
 
     public virtual void SpawnWord()
     {

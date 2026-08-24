@@ -14,6 +14,7 @@ public class PlayerController : AllCharacterController
     [SerializeField] private Image healthImage;
 
     [SerializeField] private GameObject playerTypingField;
+    private readonly int maxCharLength = 12;
 
     [Header("Game Over")]
     public Text gameOverScreen;
@@ -22,8 +23,8 @@ public class PlayerController : AllCharacterController
 
     public override void Start()
     {
-        //base.Start();
-        //word.character = this;
+        base.Start();
+        word.character = this;
     }
 
     public override void Update()
@@ -69,7 +70,44 @@ public class PlayerController : AllCharacterController
 
     public void TypeWord()
     {
-        playerTypingField.transform.position = Camera.main.WorldToScreenPoint(transform.position + wordOffset);
+        foreach(var c in Input.inputString)
+        {
+            string str = word.text.text;
+            if (c == '\b')
+            {
+                if(str != "")
+                {
+                    str = str.Remove(str.Length - 1);
+                }
+            }
+            else if(c == '\r')
+            {
+                if (WordList.Instance.wordDictionary.ContainsKey(str))
+                {
+                    WordList.Instance.wordDictionary[str].GetComponent<EnemyController>().OnDeath();
+                    WordList.Instance.wordDictionary[str] = null;
+                }
+                else
+                    Debug.Log(str);
+                    str = "";
+                word.text.text = str;
+                break;
+            }
+            else if(c == ' ')
+            {
+                continue;
+            }
+            else
+            {
+                str += c.ToString();
+            }
+
+            if(str.Length > maxCharLength)
+            {
+                str = str.Remove(str.Length - 1, 1);
+            }
+            word.text.text = str;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
