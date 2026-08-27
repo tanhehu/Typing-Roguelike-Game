@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveController : MonoBehaviour
 {
     private float spawnTimer = 0;
-    private float spawnRate = 4;
+    public float spawnRate = 4;
 
     public EnemyController enemyPrefab;
     private Vector3 playerPos => Player.Instance.transform.position;
@@ -29,7 +29,7 @@ public class WaveController : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        EnemyController enemy = CreateController.Instance.Create<EnemyController>(enemyPrefab);
-        enemy.transform.position = new Vector3(Random.Range(playerPos.x - 10, playerPos.x + 10), Random.Range(playerPos.y - 10, playerPos.y + 10), 0);
+       EnemyController enemy = CreateController.Instance.Create<EnemyController>(enemyPrefab);
+       enemy.transform.position = new Vector3(Random.Range(playerPos.x - 10, playerPos.x + 10), Random.Range(playerPos.y - 10, playerPos.y + 10), 0);
     }
 }

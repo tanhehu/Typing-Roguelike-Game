@@ -26,6 +26,7 @@ public class EnemyController : AllCharacterController
     {
         base.Start();
         word.character = this;
+        this.speed = UnityEngine.Random.Range(0.1f, 0.4f);
     }
 
     public override void Update()

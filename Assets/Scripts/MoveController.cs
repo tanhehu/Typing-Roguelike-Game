@@ -6,7 +6,7 @@ public class MoveController : MonoBehaviour
 {
     private Vector3 direction;
     [Header("Move")]
-    [SerializeField] private float speed;
+    [SerializeField] protected float speed;
 
     public Vector3 Direction
     {

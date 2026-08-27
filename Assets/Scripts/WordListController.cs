@@ -26,8 +26,8 @@ public class WordListController : MonoBehaviour
     {
         bool checkNull = false;
         int num = 0;
-        while(!checkNull)
-        {
+        while(!checkNull)                                                                   // To do: Put a cap on number of words created on screen 
+        {                                                                                   // Current Problem: When out of word, loop run infinitely
             num = Random.Range(0, wordList.Capacity);
             if (wordDictionary[wordList[num]] == null)
             {

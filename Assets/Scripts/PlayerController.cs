@@ -84,14 +84,14 @@ public class PlayerController : AllCharacterController
             {
                 if (WordList.Instance.wordDictionary.ContainsKey(str))
                 {
-                    WordList.Instance.wordDictionary[str].deathDelegate?.Invoke();
+                    WordList.Instance.wordDictionary[str].deathDelegate?.Invoke();                      // Trigger enemy death and word destroy
                     WordList.Instance.wordDictionary[str] = null;
                     str = "";
                     word.text.text = str;
                 }
                 break;
             }
-            else if(c == ' ' || (int)c < 65 || (int)c > 122 || ((int)c > 90 && (int)c < 97))
+            else if(c == ' ' || (int)c < 65 || (int)c > 122 || ((int)c > 90 && (int)c < 97))            // Reference to ASII Table, check if the char is anything beside letters
             {
                 continue;
             }
@@ -100,7 +100,7 @@ public class PlayerController : AllCharacterController
                 str += c.ToString();
             }
 
-            if(str.Length > maxCharLength)
+            if(str.Length > maxCharLength)                                                              // Max letters allowed
             {
                 str = str.Remove(str.Length - 1, 1);
             }
