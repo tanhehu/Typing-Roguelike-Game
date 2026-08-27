@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class EnemyController : AllCharacterController
 {
@@ -10,6 +11,16 @@ public class EnemyController : AllCharacterController
 
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
+
+    private void OnEnable()
+    {
+        deathDelegate += OnDeath;
+    }
+
+    private void OnDisable()
+    {
+        deathDelegate -= OnDeath;
+    }
 
     public override void Start()
     {
@@ -53,30 +64,28 @@ public class EnemyController : AllCharacterController
     {
         isWalking = distance.magnitude > range && !isAttacking;
         base.Animation();
-        animator.SetBool("Death", isDying);
     }
 
-    public virtual void OnDeath()
+    public void OnDeath()
     {
         isDying = true;
-        word.character = null;
-        Destroy(this, 3);
+        animator.Play("OrkDeath");
+        StartCoroutine(OnDeathCoroutine());
     }
 
     #endregion
 
+    private IEnumerator OnDeathCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        this.gameObject.SetActive(false);
+    }
+
     public override void SpawnWord()
     {
         base.SpawnWord();
-        foreach (var word in WordList.Instance.wordDictionary)
-        {
-            if(word.Value == null)
-            {
-                this.word.text.text = word.Key;
-                WordList.Instance.wordDictionary[word.Key] = this.gameObject;
-                break;
-            }
-        }
+        int num = WordList.Instance.ChooseWord(this);
+        word.text.text = WordList.Instance.wordList[num];
     }
 
     public void DrawRange()

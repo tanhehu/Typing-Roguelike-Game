@@ -62,7 +62,7 @@ public class PlayerController : AllCharacterController
     public override void Animation()
     {
         isWalking = inputX * inputX + inputY * inputY >= 0.25f;
-        animator.SetFloat("Health", health);
+        this.isDying = health <= 0;
         base.Animation();
     }
 
@@ -84,16 +84,14 @@ public class PlayerController : AllCharacterController
             {
                 if (WordList.Instance.wordDictionary.ContainsKey(str))
                 {
-                    WordList.Instance.wordDictionary[str].GetComponent<EnemyController>().OnDeath();
+                    WordList.Instance.wordDictionary[str].deathDelegate?.Invoke();
                     WordList.Instance.wordDictionary[str] = null;
-                }
-                else
-                    Debug.Log(str);
                     str = "";
-                word.text.text = str;
+                    word.text.text = str;
+                }
                 break;
             }
-            else if(c == ' ')
+            else if(c == ' ' || (int)c < 65 || (int)c > 122 || ((int)c > 90 && (int)c < 97))
             {
                 continue;
             }
@@ -119,6 +117,7 @@ public class PlayerController : AllCharacterController
             if(health <= 0)
             {
                 gameOverScreen.gameObject.SetActive(true);
+                animator.Play("PlayerDeath");
                 StartCoroutine(QuitGame());
             }
         }

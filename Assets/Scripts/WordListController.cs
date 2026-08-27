@@ -9,8 +9,8 @@ using UnityEngine.UI;
 
 public class WordListController : MonoBehaviour
 {
-    public Dictionary<string, GameObject> wordDictionary = new Dictionary<string, GameObject>();
-    public List<string> wordList = new List<string> { "Jack", "Tan", "Matthew" };
+    public Dictionary<string, EnemyController> wordDictionary = new Dictionary<string, EnemyController>();
+    public List<string> wordList = new List<string>();
 
     public Canvas wordCanvas;
 
@@ -22,9 +22,20 @@ public class WordListController : MonoBehaviour
         }
     }
 
-    public void Update()
+    public int ChooseWord(EnemyController enemy)
     {
-        
+        bool checkNull = false;
+        int num = 0;
+        while(!checkNull)
+        {
+            num = Random.Range(0, wordList.Capacity);
+            if (wordDictionary[wordList[num]] == null)
+            {
+                wordDictionary[wordList[num]] = enemy;
+                checkNull = true;
+            }
+        }
+        return num;
     }
 }
 

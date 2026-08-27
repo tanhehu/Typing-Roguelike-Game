@@ -16,6 +16,9 @@ public abstract class AllCharacterController : MoveController
     protected WordController word;
     public Vector3 wordOffset;
 
+    public delegate void Death();
+    public Death deathDelegate;
+
     public virtual void Start()
     {
         SpawnWord();

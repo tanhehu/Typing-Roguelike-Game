@@ -9,13 +9,20 @@ public class WordController : MonoBehaviour
     public Text text;
     public AllCharacterController character;
 
+    private void Start()
+    {
+        character.deathDelegate += Destroy;
+    }
+
     private void Update()
     {
-        if(character == null)
-        {
-            Destroy(this);
-        }
-        transform.position = Camera.main.WorldToScreenPoint(character.transform.position + character.wordOffset);   // This function translates the world position of the character
-    }                                                                                                       // plus its offset (to push the word above the character) to a screen position
-}                                                                                                           // which is then assigned to the word's position
-                                                                                                            // making it follow the character on the screen
+        transform.position = Camera.main.WorldToScreenPoint(character.transform.position + character.wordOffset);
+    }
+
+    public void Destroy()
+    {
+        character.deathDelegate -= Destroy;
+        character = null;
+        this.gameObject.SetActive(false);
+    }
+}
