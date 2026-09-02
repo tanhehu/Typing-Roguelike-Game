@@ -62,7 +62,7 @@ public class PlayerController : AllCharacterController
     public override void Animation()
     {
         isWalking = inputX * inputX + inputY * inputY >= 0.25f;
-        animator.SetFloat("Health", health);
+        this.isDying = health <= 0;
         base.Animation();
     }
 
@@ -84,16 +84,18 @@ public class PlayerController : AllCharacterController
             {
                 if (WordList.Instance.wordDictionary.ContainsKey(str))
                 {
+<<<<<<< HEAD
                     WordList.Instance.wordDictionary[str].GetComponent<EnemyController>().onDeath?.Invoke();
+=======
+                    WordList.Instance.wordDictionary[str].deathDelegate?.Invoke();                      // Trigger enemy death and word destroy
+>>>>>>> fefa3974b6001809cf68855b6b0fa0f2d4037efe
                     WordList.Instance.wordDictionary[str] = null;
-                }
-                else
-                    Debug.Log(str);
                     str = "";
-                word.text.text = str;
+                    word.text.text = str;
+                }
                 break;
             }
-            else if(c == ' ')
+            else if(c == ' ' || (int)c < 65 || (int)c > 122 || ((int)c > 90 && (int)c < 97))            // Reference to ASII Table, check if the char is anything beside letters
             {
                 continue;
             }
@@ -102,7 +104,7 @@ public class PlayerController : AllCharacterController
                 str += c.ToString();
             }
 
-            if(str.Length > maxCharLength)
+            if(str.Length > maxCharLength)                                                              // Max letters allowed
             {
                 str = str.Remove(str.Length - 1, 1);
             }
@@ -119,6 +121,7 @@ public class PlayerController : AllCharacterController
             if(health <= 0)
             {
                 gameOverScreen.gameObject.SetActive(true);
+                animator.Play("PlayerDeath");
                 StartCoroutine(QuitGame());
             }
         }
