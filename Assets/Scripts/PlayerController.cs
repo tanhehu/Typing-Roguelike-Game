@@ -84,7 +84,7 @@ public class PlayerController : AllCharacterController
             {
                 if (WordList.Instance.wordDictionary.ContainsKey(str))
                 {
-                    WordList.Instance.wordDictionary[str].GetComponent<EnemyController>().OnDeath();
+                    WordList.Instance.wordDictionary[str].GetComponent<EnemyController>().onDeath?.Invoke();
                     WordList.Instance.wordDictionary[str] = null;
                 }
                 else

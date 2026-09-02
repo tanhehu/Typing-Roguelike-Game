@@ -56,11 +56,9 @@ public class EnemyController : AllCharacterController
         animator.SetBool("Death", isDying);
     }
 
-    public virtual void OnDeath()
+    public override void Death()
     {
-        isDying = true;
-        word.character = null;
-        Destroy(this, 3);
+        base.Death();
     }
 
     #endregion
