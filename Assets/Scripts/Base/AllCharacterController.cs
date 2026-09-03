@@ -16,23 +16,8 @@ public abstract class AllCharacterController : MoveController
     protected WordController word;
     public Vector3 wordOffset;
 
-<<<<<<< HEAD
-    public delegate void OnDeath();
-    public OnDeath onDeath;
-
-    private void OnEnable()
-    {
-        onDeath += Death;
-    }
-
-    private void OnDisable()
-    {
-        onDeath -= Death;
-    }
-=======
     public delegate void Death();
     public Death deathDelegate;
->>>>>>> fefa3974b6001809cf68855b6b0fa0f2d4037efe
 
     public virtual void Start()
     {
@@ -80,11 +65,6 @@ public abstract class AllCharacterController : MoveController
     {
         word = CreateController.Instance.Create<WordController>(wordPrefab);
         word.transform.SetParent(WordList.Instance.wordCanvas.transform, false);
-    }
-
-    public virtual void Death()
-    {
-        Destroy(this, 3);
     }
 }
 
