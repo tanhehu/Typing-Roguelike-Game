@@ -49,7 +49,7 @@ public class PlayerController : AllCharacterController
 
     public override void Flip()
     {
-        if((isFacingRight && inputX < 0) || (!isFacingRight && inputX > 0))
+        if((isFacingRight && inputX < 0) || (!isFacingRight && inputX > 0))                             // Change direction
         {
             base.Flip();
         }
@@ -65,7 +65,7 @@ public class PlayerController : AllCharacterController
 
     public override void Animation()
     {
-        isWalking = inputX * inputX + inputY * inputY >= 0.25f;
+        isWalking = inputX * inputX + inputY * inputY >= 0.25f;                                         // Walk if input is greater than a certain threshold
         this.isDying = health <= 0;
         base.Animation();
     }
@@ -114,9 +114,9 @@ public class PlayerController : AllCharacterController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == (int)LayerMask.Enemy)
+        if (collision.gameObject.layer == (int)LayerMask.Enemy)                                         // Check if collide with enemy
         {
-            health -= collision.gameObject.GetComponent<EnemyController>().damage;
+            health -= collision.gameObject.GetComponent<EnemyController>().damage;                      // Retrieve enemy damage
             healthImage.fillAmount = health / 100f;
             if(health <= 0)
             {
@@ -126,7 +126,6 @@ public class PlayerController : AllCharacterController
             }
         }
     }
-
 
     private IEnumerator QuitGame()
     {

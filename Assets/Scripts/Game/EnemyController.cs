@@ -15,20 +15,20 @@ public class EnemyController : AllCharacterController
 
     private void OnEnable()
     {
-        deathDelegate += OnDeath;
+        deathDelegate += OnDeath;                                                   // Add enemy death logic
     }
 
     private void OnDisable()
     {
-        deathDelegate -= OnDeath;
+        deathDelegate -= OnDeath;                                                   // Remove enemy death logic
     }
 
     public override void Start()
     {
         base.Start();
-        spawnPowerupChance = UnityEngine.Random.Range(1, 100);
+        spawnPowerupChance = UnityEngine.Random.Range(1, 100);                      // Randomize powerup spawn chance
         word.character = this;
-        this.speed = UnityEngine.Random.Range(0.1f, 0.4f);
+        this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
     }
 
     public override void Update()
@@ -57,7 +57,7 @@ public class EnemyController : AllCharacterController
 
     public override void Flip()
     {
-        if((distance.x > 0 && !isFacingRight) || (distance.x <= 0 && isFacingRight))
+        if((distance.x > 0 && !isFacingRight) || (distance.x <= 0 && isFacingRight))            // Direction changes
         {
             base.Flip();
         }
@@ -83,8 +83,8 @@ public class EnemyController : AllCharacterController
         PowerupController powerup;
         if (spawnPowerupChance <= 30)
         {
-            powerup = PowerupListController.Instance.SpawnPowerup();
-            powerup.transform.position = this.transform.position;
+            powerup = PowerupListController.Instance.SpawnPowerup();                            // Spawn powerup
+            powerup.transform.position = this.transform.position;                               // Set powerup position to enemy death position
         }
         this.gameObject.SetActive(false);
     }
@@ -92,14 +92,14 @@ public class EnemyController : AllCharacterController
     public override void SpawnWord()
     {
         base.SpawnWord();
-        int num = WordList.Instance.RandomizeWord(this);
-        word.text.text = WordList.Instance.wordList[num];
+        int num = WordList.Instance.RandomizeWord(this);                                        // Choose a word from the word pool using its index
+        word.text.text = WordList.Instance.wordList[num];                                       
     }
 
     public void DrawRange()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, range);                                       // Draw enemy range on Scene tab
     }
 
     public void OnDrawGizmos()

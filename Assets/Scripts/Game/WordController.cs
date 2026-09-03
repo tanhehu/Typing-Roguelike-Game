@@ -11,24 +11,18 @@ public class WordController : MonoBehaviour
 
     private void Start()
     {
-        character.deathDelegate += Destroy;
-    }
-
-    private void OnDisable()
-    {
-        character.deathDelegate += Destroy;
+        character.deathDelegate += Destroy;                     // Add destroy function to event trigger
     }
 
     private void Update()
     {
-
-        transform.position = Camera.main.WorldToScreenPoint(character.transform.position + character.wordOffset);
+        transform.position = Camera.main.WorldToScreenPoint(character.transform.position + character.wordOffset);       // Set and translate canvas to Screen (UI) position that follow the target + offset
     }
 
     public void Destroy()
     {
         this.gameObject.SetActive(false);
-        character.deathDelegate -= Destroy;
+        character.deathDelegate -= Destroy;                     // Remove destroy function to event trigger
         character = null;
     }
 }

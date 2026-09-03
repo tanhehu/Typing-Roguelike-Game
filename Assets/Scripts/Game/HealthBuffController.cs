@@ -15,6 +15,7 @@ public class HealthBuffController : PowerupEffectController
         {
             Player.Instance.health = 100;
         }
+
         Player.Instance.healthImage.fillAmount = Player.Instance.health / 100;
         base.ApplyEffect();
     }

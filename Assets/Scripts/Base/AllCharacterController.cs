@@ -16,8 +16,8 @@ public abstract class AllCharacterController : MoveController
     protected WordController word;
     public Vector3 wordOffset;
 
-    public delegate void Death();
-    public Death deathDelegate;
+    public delegate void Death();                                                           
+    public Death deathDelegate;                                                 // Death event trigger
 
     public virtual void Start()
     {
@@ -41,7 +41,7 @@ public abstract class AllCharacterController : MoveController
 
     public virtual void Flip()
     {
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);        
         isFacingRight = !isFacingRight;
     }
 
@@ -63,8 +63,8 @@ public abstract class AllCharacterController : MoveController
 
     public virtual void SpawnWord()
     {
-        word = CreateController.Instance.Create<WordController>(wordPrefab);
-        word.transform.SetParent(WordList.Instance.wordCanvas.transform, false);
+        word = CreateController.Instance.Create<WordController>(wordPrefab);        
+        word.transform.SetParent(WordList.Instance.wordCanvas.transform, false);        // Set word to a separate canvas (word canvas) so the word can appear on game screen
     }
 }
 
