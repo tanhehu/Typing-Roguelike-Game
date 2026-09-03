@@ -66,18 +66,11 @@ public class EnemyController : AllCharacterController
         isWalking = distance.magnitude > range && !isAttacking;
         base.Animation();
     }
-
-<<<<<<< HEAD
-    public override void Death()
-    {
-        base.Death();
-=======
     public void OnDeath()
     {
         isDying = true;
         animator.Play("OrkDeath");
         StartCoroutine(OnDeathCoroutine());
->>>>>>> fefa3974b6001809cf68855b6b0fa0f2d4037efe
     }
 
     #endregion
