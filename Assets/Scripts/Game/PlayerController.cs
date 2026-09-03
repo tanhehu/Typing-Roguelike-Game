@@ -88,7 +88,11 @@ public class PlayerController : AllCharacterController
             {
                 if (WordList.Instance.wordDictionary.ContainsKey(str))
                 {
+<<<<<<< HEAD
+                    WordList.Instance.wordDictionary[str].GetComponent<EnemyController>().onDeath?.Invoke();
+=======
                     WordList.Instance.wordDictionary[str].deathDelegate?.Invoke();                      // Trigger enemy death and word destroy
+>>>>>>> fefa3974b6001809cf68855b6b0fa0f2d4037efe
                     WordList.Instance.wordDictionary[str] = null;
                     str = "";
                     word.text.text = str;

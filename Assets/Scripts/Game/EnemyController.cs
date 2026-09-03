@@ -69,10 +69,20 @@ public class EnemyController : AllCharacterController
         base.Animation();
     }
 
+<<<<<<< HEAD:Assets/Scripts/Game/EnemyController.cs
     public virtual void OnDeath()
+=======
+<<<<<<< HEAD
+    public override void Death()
+    {
+        base.Death();
+=======
+    public void OnDeath()
+>>>>>>> c6a0af5bb65983fa746adc657aa24f7ccdbd5395:Assets/Scripts/EnemyController.cs
     {
         isDying = true;
         StartCoroutine(OnDeathCoroutine());
+>>>>>>> fefa3974b6001809cf68855b6b0fa0f2d4037efe
     }
 
     #endregion
