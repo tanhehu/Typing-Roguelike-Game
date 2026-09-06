@@ -16,14 +16,8 @@ public abstract class AllCharacterController : MoveController
     protected WordController word;
     public Vector3 wordOffset;
 
-<<<<<<< HEAD:Assets/Scripts/AllCharacterController.cs
-
-    public delegate void Death();
-    public Death deathDelegate;
-=======
     public delegate void Death();                                                           
     public Death deathDelegate;                                                 // Death event trigger
->>>>>>> ef556ff625e9715aef00d8cd83c4a9e484483c47:Assets/Scripts/Base/AllCharacterController.cs
 
     public virtual void Start()
     {
@@ -69,13 +63,8 @@ public abstract class AllCharacterController : MoveController
 
     public virtual void SpawnWord()
     {
-<<<<<<< HEAD:Assets/Scripts/AllCharacterController.cs
-        word = CreateController.Instance.Create<WordController>(wordPrefab);
-        word.transform.SetParent(WordList.Instance.wordCanvas.transform, false);
-=======
         word = CreateController.Instance.Create<WordController>(wordPrefab);        
         word.transform.SetParent(WordList.Instance.wordCanvas.transform, false);        // Set word to a separate canvas (word canvas) so the word can appear on game screen
->>>>>>> ef556ff625e9715aef00d8cd83c4a9e484483c47:Assets/Scripts/Base/AllCharacterController.cs
     }
 }
 

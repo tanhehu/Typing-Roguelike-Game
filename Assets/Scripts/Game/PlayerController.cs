@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+public class Player : SingletonMonobehaviour<PlayerController>
+{
+
+}
+
 public class PlayerController : AllCharacterController
 {
     private bool disableInput = false;
@@ -72,6 +77,7 @@ public class PlayerController : AllCharacterController
 
     #endregion
 
+    #region Typing Mechanics
     public void TypeWord()
     {
         foreach(var c in Input.inputString)
@@ -86,13 +92,9 @@ public class PlayerController : AllCharacterController
             }
             else if(c == '\r')                                                                          // Enter
             {
-                if (WordList.Instance.wordDictionary.ContainsKey(str))
-                {
-                    WordList.Instance.wordDictionary[str].deathDelegate?.Invoke();                      // Trigger enemy death and word destroy
-                    WordList.Instance.wordDictionary[str] = null;
-                    str = "";
-                    word.text.text = str;
-                }
+                WordList.Instance.WordCheck(str);                                                               // Check if the word is in the list
+                str = "";                                                                               // Reset canvas after matching word
+                word.text.text = str;
                 break;
             }
             else if(c == ' ' || (int)c < 65 || (int)c > 122 || ((int)c > 90 && (int)c < 97))            // Reference to ASII Table, check if the char is anything beside letters
@@ -111,6 +113,8 @@ public class PlayerController : AllCharacterController
             word.text.text = str;
         }
     }
+
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -135,9 +139,4 @@ public class PlayerController : AllCharacterController
         yield return new WaitForSeconds(1);
         Application.Quit();
     }
-}
-
-public class Player : SingletonMonobehaviour<PlayerController>
-{
-
 }

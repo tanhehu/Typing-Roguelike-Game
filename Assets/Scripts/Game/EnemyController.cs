@@ -68,12 +68,8 @@ public class EnemyController : AllCharacterController
         isWalking = distance.magnitude > range && !isAttacking;
         base.Animation();
     }
-<<<<<<< HEAD:Assets/Scripts/EnemyController.cs
-    public void OnDeath()
-=======
 
     public virtual void OnDeath()
->>>>>>> ef556ff625e9715aef00d8cd83c4a9e484483c47:Assets/Scripts/Game/EnemyController.cs
     {
         isDying = true;
         StartCoroutine(OnDeathCoroutine());

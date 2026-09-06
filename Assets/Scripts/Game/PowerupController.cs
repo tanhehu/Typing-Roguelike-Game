@@ -8,7 +8,7 @@ public class PowerupController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        powerupEffect.ApplyEffect();
+        powerupEffect.ApplyEffect(Player.Instance);
         Destroy();
     }
 

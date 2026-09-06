@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Powerups/HealthBuff")]
@@ -8,15 +7,15 @@ public class HealthBuffController : PowerupEffectController
 {
     public float healthBuff;
 
-    public override void ApplyEffect()
+    public override void ApplyEffect(PlayerController player)
     {
-        Player.Instance.health += healthBuff;
-        if (Player.Instance.health > 100)
+        player.health += healthBuff;
+        if (player.health > 100)
         {
-            Player.Instance.health = 100;
+            player.health = 100;
         }
 
-        Player.Instance.healthImage.fillAmount = Player.Instance.health / 100;
-        base.ApplyEffect();
+        player.healthImage.fillAmount = player.health / 100;
+        base.ApplyEffect(player);
     }
 }

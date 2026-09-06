@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerupEffectController : ScriptableObject
 {
-    public virtual void ApplyEffect()
+    public virtual void ApplyEffect(PlayerController player)
     {
 
     }
