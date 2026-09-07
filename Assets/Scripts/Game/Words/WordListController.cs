@@ -52,10 +52,10 @@ public class WordListController : MonoBehaviour
 
     public void BuffApplyCountDown(ref bool buff,float time)
     {
-        StartCoroutine(BuffApllyCountDonwCoroutine(time));
+        StartCoroutine(BuffApllyCountDownCoroutine(time));
     }
 
-    private IEnumerator BuffApllyCountDonwCoroutine(float time)
+    private IEnumerator BuffApllyCountDownCoroutine(float time)
     {
         caseSensitiveBuff = true;
         Debug.Log("Gained Removing Case Sensitive Buff");
@@ -66,16 +66,27 @@ public class WordListController : MonoBehaviour
 
     public void WordCheck(string str)
     {
-
         if (wordDictionary.ContainsKey(str))                               // Check if the word is in the list  
         {
             wordDictionary[str].deathDelegate?.Invoke();                   // Trigger enemy death and word destroy
             wordDictionary[str] = null;
         }
-        else if((caseSensitiveBuff && wordDictionaryNoCase.ContainsKey(str.ToLower())))      // or if the case sensitive buff is active and the word is in the list
+        else if(caseSensitiveBuff)                                         // or if the case sensitive buff is active and the word is in the list
         {
-            wordDictionaryNoCase[str.ToLower()].deathDelegate?.Invoke();                    // Trigger enemy death and word destroy
-            wordDictionaryNoCase[str.ToLower()] = null;
+            string check = "";
+            for(int i = 0; i < wordList.Count; i++)
+            {
+                if (wordList[i].ToLower() == str.ToLower())
+                {
+                    check = wordList[i];
+                    break;
+                }
+            }
+            if(check != "")
+            {
+                wordDictionary[check].deathDelegate?.Invoke();                    // Trigger enemy death and word destroy
+                wordDictionary[check] = null;
+            }
         }
     }
 }
