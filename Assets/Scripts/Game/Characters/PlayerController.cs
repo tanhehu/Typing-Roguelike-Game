@@ -25,7 +25,6 @@ public class PlayerController : AllCharacterController
     [Header("Game Over")]
     public Text gameOverScreen;
     public Button restartButton;
-    public Sprite deathSprite;
 
     public override void Start()
     {
@@ -49,7 +48,7 @@ public class PlayerController : AllCharacterController
             inputY = Input.GetAxis("Vertical");
         }
         Direction = new Vector3(inputX, inputY, 0);
-        base.Move(Direction);
+        transform.position += speed * Direction * Time.deltaTime;
     }
 
     public override void Flip()

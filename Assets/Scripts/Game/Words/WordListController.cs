@@ -22,6 +22,7 @@ public class WordListController : MonoBehaviour
     public Canvas wordCanvas;
 
     public bool caseSensitiveBuff = false;
+    public int trimLetterBuff = 0;
 
     private void Awake()
     {
@@ -30,6 +31,12 @@ public class WordListController : MonoBehaviour
             wordDictionary.Add(word, null);
             wordDictionaryNoCase.Add(word.ToLower(), null);
         }
+    }
+
+    private void EnemyDestroyInvoke(string check)
+    {
+        wordDictionary[check].deathDelegate?.Invoke();                    // Trigger enemy death and word destroy
+        wordDictionary[check] = null;
     }
 
     public int RandomizeWord(EnemyController enemy)
@@ -50,26 +57,11 @@ public class WordListController : MonoBehaviour
         return num;
     }
 
-    public void BuffApplyCountDown(ref bool buff,float time)
-    {
-        StartCoroutine(BuffApllyCountDownCoroutine(time));
-    }
-
-    private IEnumerator BuffApllyCountDownCoroutine(float time)
-    {
-        caseSensitiveBuff = true;
-        Debug.Log("Gained Removing Case Sensitive Buff");
-        yield return new WaitForSeconds(time);
-        caseSensitiveBuff = false;
-        Debug.Log("Case Sensitive Buff Has Ended.");
-    }
-
     public void WordCheck(string str)
     {
         if (wordDictionary.ContainsKey(str))                               // Check if the word is in the list  
         {
-            wordDictionary[str].deathDelegate?.Invoke();                   // Trigger enemy death and word destroy
-            wordDictionary[str] = null;
+            EnemyDestroyInvoke(str);
         }
         else if(caseSensitiveBuff)                                         // or if the case sensitive buff is active and the word is in the list
         {
@@ -84,8 +76,38 @@ public class WordListController : MonoBehaviour
             }
             if(check != "")
             {
-                wordDictionary[check].deathDelegate?.Invoke();                    // Trigger enemy death and word destroy
-                wordDictionary[check] = null;
+                EnemyDestroyInvoke(check);
+            }
+        }
+        else if(trimLetterBuff != 0)
+        {
+            string check = "";
+            if (trimLetterBuff == 1)
+            {
+                for (int i = 0; i < wordList.Count; i++)
+                {
+                    if (wordList[i].Substring(2) == str)
+                    {
+                        check = wordList[i];
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < wordList.Count; i++)
+                { 
+                    if (wordList[i].Substring(0, wordList[i].Length - 2) == str)
+                    {
+                        check = wordList[i];
+                        break;
+                    }
+                }
+            }
+            
+            if(check != "")
+            {
+                EnemyDestroyInvoke(check);
             }
         }
     }

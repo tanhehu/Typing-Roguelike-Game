@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbcd6866e52c56469ddb8f9d7459aea, type: 3}
-  m_Name: Case Remove Buff Major
+  m_Script: {fileID: 11500000, guid: 0068786ba3f7ad843a38d557041ed797, type: 3}
+  m_Name: Buff Health Major
   m_EditorClassIdentifier: 
-  time: 10
+  healthBuff: 30

@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbcd6866e52c56469ddb8f9d7459aea, type: 3}
-  m_Name: Case Remove Buff Minor
+  m_Script: {fileID: 11500000, guid: b7de54555665203489ad313b021658f4, type: 3}
+  m_Name: Buff Trim Letter First Two
   m_EditorClassIdentifier: 
-  time: 5
+  duration: 10
+  trimPos: 0

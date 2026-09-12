@@ -557,6 +557,7 @@ MonoBehaviour:
   - MichealJ
   wordCanvas: {fileID: 802169058}
   caseSensitiveBuff: 0
+  trimLetterBuff: 0
 --- !u!4 &883782549
 Transform:
   m_ObjectHideFlags: 0
@@ -1271,7 +1272,6 @@ MonoBehaviour:
   playerTypingField: {fileID: 1042917556}
   gameOverScreen: {fileID: 2023664338}
   restartButton: {fileID: 1196812614}
-  deathSprite: {fileID: -1945854299, guid: 36e5f5c50e7ecc240bb5b7a40573afd7, type: 3}
 --- !u!95 &1548349631
 Animator:
   serializedVersion: 5
@@ -1389,6 +1389,10 @@ MonoBehaviour:
   - {fileID: 2836225387796932449, guid: 26982404e2a96fe44962b328f41ae46a, type: 3}
   - {fileID: 872908166319890401, guid: 51bb9db5f45795f4ea728d48ba463027, type: 3}
   - {fileID: 7507622659272242376, guid: 62697fb3598a31b43b2e85bf0384d5c2, type: 3}
+  - {fileID: 239606799415981681, guid: 6d4012aefed881648bc6c090f0195ac4, type: 3}
+  - {fileID: 6933347513208722316, guid: 6ff8c5a4ecd743e4d8fcd2332eda4f9f, type: 3}
+  - {fileID: 1284010918998599503, guid: 02465318074f5344a8cc64f3d1196e3b, type: 3}
+  - {fileID: 7151366996631393280, guid: a8941433b084cb1468e1cf247bc97f57, type: 3}
 --- !u!4 &1666762088
 Transform:
   m_ObjectHideFlags: 0
