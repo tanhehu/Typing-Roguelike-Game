@@ -44,15 +44,16 @@ public class EnemyController : AllCharacterController
     }
     public override void Attack()
     {
-        if(distance.magnitude <= range)
-        {
-            isAttacking = true;
-            base.Attack();
-        }
-        else
-        {
-            isAttacking = false;
-        }
+        //if(distance.magnitude <= range)
+        //{
+        //    isAttacking = true;
+        //    base.Attack();
+        //}
+        //else
+        //{
+        //    isAttacking = false;
+        //}
+        isAttacking = distance.magnitude <= range ? true : false;
     }
 
     public override void Flip()
