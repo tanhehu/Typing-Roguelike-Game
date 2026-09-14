@@ -121,7 +121,7 @@ public class PlayerController : AllCharacterController
         {
             health -= collision.gameObject.GetComponent<EnemyController>().damage;                      // Retrieve enemy damage
             healthImage.fillAmount = health / 100f;
-            if(health <= 0)
+            if (health <= 0)
             {
                 gameOverScreen.gameObject.SetActive(true);
                 animator.Play("PlayerDeath");

@@ -166,4 +166,4 @@ MonoBehaviour:
   wordOffset: {x: 0, y: 0.8, z: 0}
   range: 1
   damage: 15
-  spawnPowerupChance: 0
+  spawnPowerupChance: 10
