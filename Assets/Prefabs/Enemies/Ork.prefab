@@ -131,7 +131,7 @@ MonoBehaviour:
   wordOffset: {x: 0, y: 0.85, z: 0}
   range: 1.5
   damage: 10
-  exp: 0
+  spawnPowerupChance: 20
 --- !u!70 &8136948270035384492
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

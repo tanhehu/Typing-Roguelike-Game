@@ -39,8 +39,8 @@ public class WordListController : MonoBehaviour
         wordDictionary[check] = null;
     }
 
-    public int RandomizeWord(EnemyController enemy)
-    {
+    public int RandomizeWord(EnemyController enemy)                       // Existing problem: when two enemies of same word appears, the word check only kills one
+    {                                                                     // Solution: use list of enemies for a word
         bool checkNull = false;
         int checkTime = 0;
         int num = 0;

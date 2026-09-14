@@ -9,6 +9,7 @@ public class EnemyController : AllCharacterController
     [SerializeField] private float range;
     public float damage;
     public float spawnPowerupChance;
+    private float spawnPowerupNumber;
 
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
@@ -26,7 +27,7 @@ public class EnemyController : AllCharacterController
     public override void Start()
     {
         base.Start();
-        spawnPowerupChance = UnityEngine.Random.Range(1, 100);                      // Randomize powerup spawn chance
+        spawnPowerupNumber = UnityEngine.Random.Range(1, 100);                      // Randomize powerup spawn chance
         word.character = this;
         this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
     }
@@ -82,7 +83,7 @@ public class EnemyController : AllCharacterController
     {
         yield return new WaitForSeconds(1);
         PowerupController powerup;
-        if (spawnPowerupChance <= 30)
+        if (spawnPowerupNumber <= spawnPowerupChance)
         {
             powerup = PowerupListController.Instance.SpawnPowerup();                            // Spawn powerup
             powerup.transform.position = this.transform.position;                               // Set powerup position to enemy death position
