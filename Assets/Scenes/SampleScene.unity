@@ -335,8 +335,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRate: 3
-  spawnLessZone: 0
-  enemyPrefab: {fileID: 8015617695686323216, guid: ededf119afdbca44c8bfb41e29bd7ec0, type: 3}
+  spawnLessZone: 5
+  enemyPrefabList:
+  - {fileID: 6203441483490423930, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+  - {fileID: 2395895218313619333, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
+  - {fileID: 8015617695686323216, guid: ededf119afdbca44c8bfb41e29bd7ec0, type: 3}
 --- !u!1 &663311400
 GameObject:
   m_ObjectHideFlags: 0
