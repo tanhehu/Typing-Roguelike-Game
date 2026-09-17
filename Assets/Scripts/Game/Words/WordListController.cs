@@ -14,8 +14,6 @@ public class WordList : SingletonMonobehaviour<WordListController>
 public class WordListController : MonoBehaviour
 {
     public Dictionary<string, EnemyController> wordDictionary = new Dictionary<string, EnemyController>();
-    public Dictionary<string, EnemyController> wordDictionaryNoCase = new Dictionary<string, EnemyController>();
-
     public List<string> wordList = new List<string>();
 
 
@@ -26,10 +24,9 @@ public class WordListController : MonoBehaviour
 
     private void Awake()
     {
-        foreach(var word in wordList)
+        foreach (var word in wordList)
         {
             wordDictionary.Add(word, null);
-            wordDictionaryNoCase.Add(word.ToLower(), null);
         }
     }
 

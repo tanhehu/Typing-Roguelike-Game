@@ -9,7 +9,7 @@ public class WaveController : MonoBehaviour
     public float spawnRate = 4;
     public float spawnLessZone;
 
-    public EnemyController enemyPrefab;
+    public List<EnemyController> enemyPrefabList;
     private Vector3 playerPos => Player.Instance.transform.position;
 
     void Start()
@@ -31,7 +31,8 @@ public class WaveController : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        EnemyController enemy = CreateController.Instance.Create<EnemyController>(enemyPrefab);
+        int random = UnityEngine.Random.Range(0, enemyPrefabList.Capacity);
+        EnemyController enemy = CreateController.Instance.Create<EnemyController>(enemyPrefabList[random]);
         enemy.transform.position = new Vector3(UnityEngine.Random.Range(playerPos.x - 10, playerPos.x + 10), UnityEngine.Random.Range(playerPos.y - 10, playerPos.y + 10), 0);           // Set enemy pos to a random pos around player
 
         if(Mathf.Abs(Vector3.Magnitude(enemy.transform.position - playerPos)) <= spawnLessZone)             // if the enemy is too close to the player, push it away
