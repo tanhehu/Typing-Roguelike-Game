@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine;
 public class PowerupController : MonoBehaviour
 {
     public PowerupEffectController powerupEffect;
+    public PowerupUIController powerupUIPrb;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         powerupEffect.ApplyEffect(Player.Instance);
+        PowerupUIController powerupUI = CreateController.Instance.Create<PowerupUIController>(powerupUIPrb);
+        powerupUI.SetAttributes(this);
         StartCoroutine(EffectCountDown(powerupEffect.duration));
     }
 

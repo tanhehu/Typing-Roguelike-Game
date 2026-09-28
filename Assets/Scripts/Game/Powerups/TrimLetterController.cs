@@ -17,18 +17,18 @@ public class TrimLetterController : PowerupEffectController
     {
         if(trimPos == TrimType.first)
         {
-            WordList.Instance.trimLetterBuff = 1;
+            WordList.Instance.buff = Buff.TrimLetterFirst;
         }
         else if(trimPos == TrimType.last)
         {
-            WordList.Instance.trimLetterBuff = -1;
+            WordList.Instance.buff = Buff.TrimLetterLast;
         }
         base.ApplyEffect(player);
     }
 
     public override void RemoveEffect(PlayerController player)
     {
-        WordList.Instance.trimLetterBuff = 0;
+        WordList.Instance.buff = Buff.None;
         base.RemoveEffect(player);
     }
 }

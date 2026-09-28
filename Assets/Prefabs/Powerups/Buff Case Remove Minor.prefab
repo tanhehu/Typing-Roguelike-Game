@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupEffect: {fileID: 11400000, guid: 55978cccac4c84b47bac4362dc39acb6, type: 2}
+  powerupUIPrb: {fileID: 1235165817034781790, guid: db12542e2000690428ed857f53364627, type: 3}
 --- !u!61 &8950504938065754808
 BoxCollider2D:
   m_ObjectHideFlags: 0
