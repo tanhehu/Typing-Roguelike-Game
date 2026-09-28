@@ -45,15 +45,6 @@ public class EnemyController : AllCharacterController
     }
     public override void Attack()
     {
-        //if(distance.magnitude <= range)
-        //{
-        //    isAttacking = true;
-        //    base.Attack();
-        //}
-        //else
-        //{
-        //    isAttacking = false;
-        //}
         isAttacking = distance.magnitude <= range ? true : false;
     }
 
@@ -93,9 +84,8 @@ public class EnemyController : AllCharacterController
 
     public override void SpawnWord()
     {
-        base.SpawnWord();
-        int num = WordList.Instance.RandomizeWord(this);                                        // Choose a word from the word pool using its index
-        word.text.text = WordList.Instance.wordList[num];                                       
+        base.SpawnWord();                                      
+        word.text.text = WordList.Instance.RandomizeWord(this);                                 // Choose a word from the word pool using its index                  
     }
 
     public void DrawRange()

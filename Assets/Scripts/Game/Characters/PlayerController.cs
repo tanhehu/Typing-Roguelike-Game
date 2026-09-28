@@ -91,7 +91,7 @@ public class PlayerController : AllCharacterController
             }
             else if(c == '\r')                                                                          // Enter
             {
-                WordList.Instance.WordCheck(str);                                                               // Check if the word is in the list
+                WordList.Instance.WordCheck(str);                                                       // Check if the word is in the list
                 str = "";                                                                               // Reset canvas after matching word
                 word.text.text = str;
                 break;

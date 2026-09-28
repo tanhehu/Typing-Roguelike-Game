@@ -11,101 +11,103 @@ public class WordList : SingletonMonobehaviour<WordListController>
 
 }
 
+public enum Buff
+{
+    None,
+    RemoveCase,
+    TrimLetterFirst,
+    TrimLetterLast
+}
+
 public class WordListController : MonoBehaviour
 {
-    public Dictionary<string, EnemyController> wordDictionary = new Dictionary<string, EnemyController>();
+    public Dictionary<string, List<EnemyController>> wordDictionary = new Dictionary<string, List<EnemyController>>();
     public List<string> wordList = new List<string>();
-
 
     public Canvas wordCanvas;
 
-    public bool caseSensitiveBuff = false;
-    public int trimLetterBuff = 0;
+    public Buff buff = Buff.None;
 
     private void Awake()
     {
         foreach (var word in wordList)
         {
-            wordDictionary.Add(word, null);
+            wordDictionary.Add(word, new List<EnemyController>());
         }
     }
 
-    private void EnemyDestroyInvoke(string check)
+    private void DestroyEnemy(string word)                                  // Trigger all enemy bearing the word death and word destroy
     {
-        wordDictionary[check].deathDelegate?.Invoke();                    // Trigger enemy death and word destroy
-        wordDictionary[check] = null;
+        while (wordDictionary[word].Count > 0)
+        {
+            var enemy = wordDictionary[word][0];
+            enemy.deathDelegate?.Invoke();                    
+            wordDictionary[word].Remove(enemy);
+        }
     }
 
-    public int RandomizeWord(EnemyController enemy)                       // Existing problem: when two enemies of same word appears, the word check only kills one
-    {                                                                     // Solution: use list of enemies for a word
+    public string RandomizeWord(EnemyController enemy)                       // Existing problem: when two enemies of same word appears, the word check only kills one
+    {                                                                        // Solution: use list of enemies for a word
         bool checkNull = false;
         int checkTime = 0;
         int num = 0;
-        while(!checkNull && checkTime < 100)                                                                 
-        {                                                                                  
+        while (!checkNull && checkTime < 100)
+        {
             num = Random.Range(0, wordList.Count);
-            if (wordDictionary[wordList[num]] == null)
+            if (wordDictionary[wordList[num]].Count == 0)
             {
-                wordDictionary[wordList[num]] = enemy;
                 checkNull = true;
             }
             checkTime++;
         }
-        return num;
+        wordDictionary[wordList[num]].Add(enemy);
+        return wordList[num];
     }
 
-    public void WordCheck(string str)
+public void WordCheck(string str)                                          // Design narrative: should there be multiple buff at once or just one (currently) 
     {
         if (wordDictionary.ContainsKey(str))                               // Check if the word is in the list  
         {
-            EnemyDestroyInvoke(str);
+            DestroyEnemy(str);
+            return;
         }
-        else if(caseSensitiveBuff)                                         // or if the case sensitive buff is active and the word is in the list
+
+        switch (buff)
         {
-            string check = "";
-            for(int i = 0; i < wordList.Count; i++)
-            {
-                if (wordList[i].ToLower() == str.ToLower())
+            case Buff.None:
+                break;
+            case Buff.RemoveCase:                                                  // Or if case remove is on effect
+                for (int i = 0; i < wordList.Count; i++)
                 {
-                    check = wordList[i];
-                    break;
+                    if (wordList[i].ToLower() == str.ToLower())
+                    {
+                        DestroyEnemy(wordList[i]);
+                        break;
+                    }
                 }
-            }
-            if(check != "")
-            {
-                EnemyDestroyInvoke(check);
-            }
-        }
-        else if(trimLetterBuff != 0)
-        {
-            string check = "";
-            if (trimLetterBuff == 1)
-            {
+                break;
+
+            case Buff.TrimLetterFirst:                                              // Or if trim first two letters is on effect
                 for (int i = 0; i < wordList.Count; i++)
                 {
                     if (wordList[i].Substring(2) == str)
                     {
-                        check = wordList[i];
+                        DestroyEnemy(wordList[i]);
                         break;
                     }
                 }
-            }
-            else
-            {
+                break;
+
+            case Buff.TrimLetterLast:                                                // Or if trim last two letters is on effect
                 for (int i = 0; i < wordList.Count; i++)
-                { 
+                {
                     if (wordList[i].Substring(0, wordList[i].Length - 2) == str)
                     {
-                        check = wordList[i];
+                        DestroyEnemy(wordList[i]);
                         break;
                     }
                 }
-            }
-            
-            if(check != "")
-            {
-                EnemyDestroyInvoke(check);
-            }
+                break;
         }
     }
 }
