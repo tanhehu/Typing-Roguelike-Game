@@ -25,6 +25,7 @@ public class WordListController : MonoBehaviour
     public List<string> wordList = new List<string>();
 
     public Canvas wordCanvas;
+    public Canvas powerupCanvas;
 
     public Buff buff = Buff.None;
 

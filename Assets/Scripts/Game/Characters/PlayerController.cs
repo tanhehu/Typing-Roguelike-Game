@@ -22,9 +22,8 @@ public class PlayerController : AllCharacterController
     [SerializeField] private GameObject playerTypingField;
     private readonly int maxCharLength = 12;
 
-    [Header("Game Over")]
-    public Text gameOverScreen;
-    public Button restartButton;
+    [Header("Menu")]
+    public MenuController menu;
 
     public override void Start()
     {
@@ -36,6 +35,10 @@ public class PlayerController : AllCharacterController
     {
         base.Update();
         TypeWord();
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            menu.OnPause();
+        }
     }
 
     #region Base
@@ -123,19 +126,18 @@ public class PlayerController : AllCharacterController
             healthImage.fillAmount = health / 100f;
             if (health <= 0)
             {
-                gameOverScreen.gameObject.SetActive(true);
                 animator.Play("PlayerDeath");
-                StartCoroutine(QuitGame());
+                StartCoroutine(GameOVer());
             }
         }
     }
 
-    private IEnumerator QuitGame()
+    private IEnumerator GameOVer()
     {
         disableInput = true;
         inputX = 0;
         inputY = 0;
         yield return new WaitForSeconds(1);
-        Application.Quit();
+        menu.OnDeath();
     }
 }

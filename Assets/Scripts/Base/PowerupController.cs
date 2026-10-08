@@ -10,7 +10,6 @@ public class PowerupController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        powerupEffect.ApplyEffect(Player.Instance);
         PowerupUIController powerupUI = CreateController.Instance.Create<PowerupUIController>(powerupUIPrb);
         powerupUI.SetAttributes(this);
         StartCoroutine(EffectCountDown(powerupEffect.duration));
@@ -18,6 +17,7 @@ public class PowerupController : MonoBehaviour
 
     private IEnumerator EffectCountDown(float time)
     {
+        powerupEffect.ApplyEffect(Player.Instance);
         DisableObject();
         yield return new WaitForSecondsRealtime(time);
         powerupEffect.RemoveEffect(Player.Instance);
