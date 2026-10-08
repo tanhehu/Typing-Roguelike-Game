@@ -20,7 +20,7 @@ public class PowerupUIController : MonoBehaviour
 
     public void SetAttributes(PowerupController powerup)
     {
-        transform.SetParent(WordList.Instance.wordCanvas.transform, false);
+        transform.SetParent(WordList.Instance.powerupCanvas.transform, false);
         powerupImage.sprite = powerup.GetComponent<SpriteRenderer>().sprite;
         count = powerup.powerupEffect.duration;
     }
