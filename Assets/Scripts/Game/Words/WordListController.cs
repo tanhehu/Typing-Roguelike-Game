@@ -6,10 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WordList : SingletonMonobehaviour<WordListController>
-{
-
-}
+public class WordList : SingletonMonobehaviour<WordListController> { }
 
 public enum Buff
 {
