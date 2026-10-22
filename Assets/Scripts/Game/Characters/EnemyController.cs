@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.AI;
 
 public class EnemyController : AllCharacterController
 {
@@ -14,6 +15,9 @@ public class EnemyController : AllCharacterController
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
 
+    [SerializeField] Transform target;
+
+    NavMeshAgent agent;
     private void OnEnable()
     {
         deathDelegate += OnDeath;                                                   // Add enemy death logic
@@ -29,7 +33,14 @@ public class EnemyController : AllCharacterController
         base.Start();
         spawnPowerupNumber = UnityEngine.Random.Range(1, 100);                      // Randomize powerup spawn chance
         word.character = this;
-        this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
+
+
+        agent = GetComponent<NavMeshAgent>();
+        //agent.updateRotation = false;
+        //agent.updateUpAxis = false;
+
+        target = Player.Instance.transform;
+        Debug.Log(transform);
     }
 
     public override void Update()
@@ -112,4 +123,14 @@ public class EnemyController : AllCharacterController
     {
         enemy.spawnPowerupChance = chance;
     }
+
+    
+
+
+   
+
+    private void FixedUpdate() { agent.SetDestination(target.position); }
+   
+    
+
 }
