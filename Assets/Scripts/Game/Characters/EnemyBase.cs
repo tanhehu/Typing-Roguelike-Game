@@ -38,6 +38,14 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
         base.Update();
     }
 
+    private void FixedUpdate()
+    {
+        if (agent.enabled)
+        {
+            agent.SetDestination(target.position);
+        }
+    }
+
     #region Base
     public override void Move()
     {
@@ -115,18 +123,8 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
         enemy.speed = speed;
     }
 
-    public void SetPowerupChance(EnemyBase enemy, int chance)
+    public void SetPowerupChance(EnemyBase enemy, bool drop)
     {
-        enemy.dropChance = chance;
+        enemy.drop = drop;
     }
-
-    
-
-
-   
-
-    private void FixedUpdate() { agent.SetDestination(target.position); }
-   
-    
-
 }
