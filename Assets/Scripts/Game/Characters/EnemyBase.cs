@@ -104,8 +104,8 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
         enemy.speed = speed;
     }
 
-    public void SetPowerupChance(EnemyBase enemy, int chance)
+    public void SetPowerupChance(EnemyBase enemy, bool drop)
     {
-        enemy.dropChance = chance;
+        enemy.drop = drop;
     }
 }

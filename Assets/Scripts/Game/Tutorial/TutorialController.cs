@@ -57,7 +57,7 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
             {
                 EnemyBase e = SpawnEnemy(spawnPos1);
                 SpawnEnemy(spawnPos2);
-                e.SetPowerupChance(e, 100);
+                e.SetPowerupChance(e, true);
                 count = 0;
             }
         }
@@ -72,7 +72,7 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
     public EnemyBase SpawnEnemy(Transform pos)
     {
         EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrb);
-        enemy.SetPowerupChance(enemy, 0);
+        enemy.SetPowerupChance(enemy, false);
         enemy.transform.position = pos.transform.position;
         return enemy;
     }
@@ -93,7 +93,7 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
         SpawnEnemy(spawnPos2);
         if(trigger == trigger2)
         {
-            e1.SetPowerupChance(e1, 100);
+            e1.SetPowerupChance(e1, true);
         }
     }
 }

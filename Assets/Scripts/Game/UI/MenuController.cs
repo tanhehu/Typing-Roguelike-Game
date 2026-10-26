@@ -49,6 +49,17 @@ public class MenuController : SingletonMonobehaviour<MenuController>
         {
             child.gameObject.SetActive(true);
         }
-        transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(2).gameObject.SetActive(false);
+    }
+
+    public void OnWin()
+    {
+        Player.Instance.disableInput = true;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 }
