@@ -277,9 +277,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7784816947968041134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0741b99a52341149bd6f52d88186806, type: 3}
+  m_Script: {fileID: 11500000, guid: 65e425de4d004c040b4b9ab76595fea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerup: {fileID: 0}
   powerupImage: {fileID: 7247837642253022339}
   powerupDuration: {fileID: 7529686189617386750}

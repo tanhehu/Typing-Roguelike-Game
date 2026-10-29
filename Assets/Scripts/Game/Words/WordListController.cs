@@ -21,11 +21,13 @@ public enum Buff
 
 public class WordListController : MonoBehaviour
 {
-    public Dictionary<string, List<EnemyController>> wordDictionary = new Dictionary<string, List<EnemyController>>();
+    public Dictionary<string, List<IWordHolder>> wordDictionary = new Dictionary<string, List<IWordHolder>>();
     public List<string> wordList = new List<string>();
 
     public Canvas wordCanvas;
     public Canvas powerupCanvas;
+
+    public WordController wordPrb;
 
     public Buff buff = Buff.None;
 
@@ -33,22 +35,22 @@ public class WordListController : MonoBehaviour
     {
         foreach (var word in wordList)
         {
-            wordDictionary.Add(word, new List<EnemyController>());
+            wordDictionary.Add(word, new List<IWordHolder>());
         }
     }
 
-    private void DestroyEnemy(string word)                                  // Trigger all enemy bearing the word death and word destroy
+    private void DestroyTarget(string word)                                  // Trigger all enemy bearing the word death and word destroy
     {
         while (wordDictionary[word].Count > 0)
         {
             var enemy = wordDictionary[word][0];
-            enemy.deathDelegate?.Invoke();                    
+            enemy.OnHit(0);                    
             wordDictionary[word].Remove(enemy);
         }
     }
 
-    public string RandomizeWord(EnemyController enemy)                       // Existing problem: when two enemies of same word appears, the word check only kills one
-    {                                                                        // Solution: use list of enemies for a word
+    public string RandomizeWord(IWordHolder target)                    
+    {                                                                       
         bool checkNull = false;
         int checkTime = 0;
         int num = 0;
@@ -61,7 +63,7 @@ public class WordListController : MonoBehaviour
             }
             checkTime++;
         }
-        wordDictionary[wordList[num]].Add(enemy);
+        wordDictionary[wordList[num]].Add(target);
         return wordList[num];
     }
 
@@ -69,7 +71,7 @@ public void WordCheck(string str)                                          // De
     {
         if (wordDictionary.ContainsKey(str))                               // Check if the word is in the list  
         {
-            DestroyEnemy(str);
+            DestroyTarget(str);
             return;
         }
 
@@ -82,7 +84,7 @@ public void WordCheck(string str)                                          // De
                 {
                     if (wordList[i].ToLower() == str.ToLower())
                     {
-                        DestroyEnemy(wordList[i]);
+                        DestroyTarget(wordList[i]);
                         break;
                     }
                 }
@@ -93,7 +95,7 @@ public void WordCheck(string str)                                          // De
                 {
                     if (wordList[i].Substring(2) == str)
                     {
-                        DestroyEnemy(wordList[i]);
+                        DestroyTarget(wordList[i]);
                         break;
                     }
                 }
@@ -104,7 +106,7 @@ public void WordCheck(string str)                                          // De
                 {
                     if (wordList[i].Substring(0, wordList[i].Length - 2) == str)
                     {
-                        DestroyEnemy(wordList[i]);
+                        DestroyTarget(wordList[i]);
                         break;
                     }
                 }

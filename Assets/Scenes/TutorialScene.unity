@@ -513,14 +513,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  isIdle: 1
   isWalking: 0
   isFacingRight: 1
   isAttacking: 0
-  isDying: 0
   animator: {fileID: 205855103}
-  wordPrefab: {fileID: 2678604908869711380, guid: a48f962f994d0064c8fd2fe53cb5d4ef, type: 3}
-  wordOffset: {x: 0, y: 1, z: 0}
   disableInput: 0
   health: 100
   healthImage: {fileID: 314173024}
@@ -1814,6 +1810,7 @@ MonoBehaviour:
   - MichealJ
   wordCanvas: {fileID: 141083048}
   powerupCanvas: {fileID: 2136972710}
+  wordPrb: {fileID: 2678604908869711380, guid: a48f962f994d0064c8fd2fe53cb5d4ef, type: 3}
   buff: 0
 --- !u!4 &1006260073
 Transform:
@@ -17642,7 +17639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -820, y: -330}
+  m_AnchoredPosition: {x: -820, y: -290}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1673035501
@@ -17678,7 +17675,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Move: Arrows\nInput: Letters \nEnter: Match words"
+  m_Text: "Move: Arrows\nStop: Space\nInput: Letters \nEnter: Match / Delete Input"
 --- !u!222 &1673035502
 CanvasRenderer:
   m_ObjectHideFlags: 0

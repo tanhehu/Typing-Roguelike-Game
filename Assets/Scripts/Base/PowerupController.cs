@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PowerupController : MonoBehaviour
 {
-    public PowerupEffectController powerupEffect;
-    public PowerupUIController powerupUIPrb;
+    public PowerupEffectBase powerupEffect;
+    public PowerupUI powerupUIPrb;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PowerupUIController powerupUI = CreateController.Instance.Create<PowerupUIController>(powerupUIPrb);
+        PowerupUI powerupUI = CreateController.Instance.Create<PowerupUI>(powerupUIPrb);
         powerupUI.SetAttributes(this);
         StartCoroutine(EffectCountDown(powerupEffect.duration));
     }

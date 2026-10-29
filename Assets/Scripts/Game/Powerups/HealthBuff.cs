@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Powerups/HealthBuff")]
-public class HealthBuffController : PowerupEffectController
+public class HealthBuff : PowerupEffectBase
 {
     public float healthBuff;
     public override void ApplyEffect(PlayerController player)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Powerups/Trim Letter")]
-public class TrimLetterController : PowerupEffectController
+public class TrimLetterBuff : PowerupEffectBase
 {
     public TrimType trimPos;
 

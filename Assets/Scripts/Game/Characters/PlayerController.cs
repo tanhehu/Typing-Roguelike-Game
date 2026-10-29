@@ -9,11 +9,16 @@ public class Player : SingletonMonobehaviour<PlayerController>
 
 }
 
-public class PlayerController : AllCharacterController
+public class PlayerController : AllCharacterBase
 {
     public bool disableInput = false;
     private float inputX;
     private float inputY;
+    private bool goX;
+    private bool goY;
+    private bool stop = false;
+    private float signX;
+    private float signY;
 
     [Header("Health")]
     public float health = 100f;
@@ -25,7 +30,6 @@ public class PlayerController : AllCharacterController
     public override void Start()
     {
         base.Start();
-        word.character = this;
     }
 
     public override void Update()
@@ -44,6 +48,19 @@ public class PlayerController : AllCharacterController
         {
             inputX = Input.GetAxis("Horizontal");
             inputY = Input.GetAxis("Vertical");
+            if (inputX != 0) { signX = Mathf.Sign(inputX); stop = false; }
+            if (inputY != 0) { signY = Mathf.Sign(inputY); stop = false; }
+
+            if(!stop)
+            {   
+                goX = inputX != 0 || !goY;
+                goY = inputY != 0 || !goX;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space)) { goX = false; goY = false; stop = true; }
+
+            if (goX) inputX = 1 * signX;
+            if (goY) inputY = 1 * signY;
         }
         Direction = new Vector3(inputX, inputY, 0);
         transform.position += speed * Direction * Time.deltaTime;
@@ -69,6 +86,20 @@ public class PlayerController : AllCharacterController
     {
         isWalking = inputX * inputX + inputY * inputY >= 0.25f;                                         // Walk if input is greater than a certain threshold
         base.Animation();
+    }
+
+    #endregion
+
+    #region Interfaces
+
+    public override void OnHit(float damage)
+    {
+        health -= damage;
+        healthImage.fillAmount = health / 100f;
+        if (health <= 0)
+        {
+            destroy?.Invoke();
+        }
     }
 
     public override void OnDeath()
@@ -135,12 +166,7 @@ public class PlayerController : AllCharacterController
     {
         if (collision.gameObject.layer == (int)LayerMask.Enemy)                                         // Check if collide with enemy
         {
-            health -= collision.gameObject.GetComponent<EnemyController>().damage;                      // Retrieve enemy damage
-            healthImage.fillAmount = health / 100f;
-            if (health <= 0)
-            {
-                OnDeath();
-            }
+            OnHit(collision.gameObject.GetComponent<EnemyBase>().damage);                      // Retrieve enemy damage
         }
     }
 

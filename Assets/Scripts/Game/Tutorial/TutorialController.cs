@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TutorialController : SingletonMonobehaviour<TutorialController>
 {
-    public EnemyController enemyPrb;
+    public EnemyBase enemyPrb;
 
     [Header("Spawn Positions")]
     public Transform spawnPos1;
@@ -24,8 +25,12 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
 
     private void Start()
     {
-        StartCoroutine(SetEnemySpeed(SpawnEnemy(spawnPos1)));
-        StartCoroutine(SetEnemySpeed(SpawnEnemy(spawnPos2)));
+        EnemyBase e1 = SpawnEnemy(spawnPos1);
+        EnemyBase e2 = SpawnEnemy(spawnPos2);
+        e1.GetComponent<NavMeshAgent>().isStopped = true;
+        e2.GetComponent<NavMeshAgent>().isStopped = true;
+        StartCoroutine(SetEnemySpeed(e1));
+        StartCoroutine(SetEnemySpeed(e2));
     }
 
     void Update()
@@ -55,9 +60,9 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
             count += Time.deltaTime;
             if(count >= spawnRate)
             {
-                EnemyController e = SpawnEnemy(spawnPos1);
+                EnemyBase e = SpawnEnemy(spawnPos1);
                 SpawnEnemy(spawnPos2);
-                e.SetPowerupChance(e, 100);
+                e.SetPowerupChance(e, true);
                 count = 0;
             }
         }
@@ -69,15 +74,16 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
         spawnPos2.transform.position += new Vector3(10, 0, 0);
     }
 
-    public EnemyController SpawnEnemy(Transform pos)
+    public EnemyBase SpawnEnemy(Transform pos)
     {
-        EnemyController enemy = CreateController.Instance.Create<EnemyController>(enemyPrb);
-        enemy.SetPowerupChance(enemy, 0);
+        EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrb);
+        enemy.SetPowerupChance(enemy, false);
         enemy.transform.position = pos.transform.position;
+;
         return enemy;
     }
 
-    private IEnumerator SetEnemySpeed(EnemyController enemy)
+    private IEnumerator SetEnemySpeed(EnemyBase enemy)
     {
         yield return new WaitForEndOfFrame();
         enemy.SetSpeed(enemy, 0);
@@ -89,11 +95,11 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
         {
             yield return null;
         }
-        EnemyController e1 = SpawnEnemy(spawnPos1);
+        EnemyBase e1 = SpawnEnemy(spawnPos1);
         SpawnEnemy(spawnPos2);
         if(trigger == trigger2)
         {
-            e1.SetPowerupChance(e1, 100);
+            e1.SetPowerupChance(e1, true);
         }
     }
 }

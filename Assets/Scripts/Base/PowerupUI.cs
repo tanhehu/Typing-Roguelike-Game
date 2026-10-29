@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PowerupUIController : MonoBehaviour
+public class PowerupUI : MonoBehaviour
 {
     public Image powerupImage;
     public Text powerupDuration;

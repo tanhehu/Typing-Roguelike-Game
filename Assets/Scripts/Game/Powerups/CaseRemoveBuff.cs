@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Powerups/SlowTimeBuff")]
-public class SlowTimeBuffController : PowerupEffectController
+[CreateAssetMenu(menuName = "Powerups/CaseRemoveBuff")]
+public class CaseRemoveBuff : PowerupEffectBase
 {
-    public float SlowTimeFactor;
     public override void ApplyEffect(PlayerController player)
     {
-        Time.timeScale = SlowTimeFactor;
+        WordList.Instance.buff = Buff.RemoveCase;
         base.ApplyEffect(player);
     }
 
     public override void RemoveEffect(PlayerController player)
     {
-        Time.timeScale = 1f;
+        WordList.Instance.buff = Buff.None;
         base.RemoveEffect(player);
     }
 }
