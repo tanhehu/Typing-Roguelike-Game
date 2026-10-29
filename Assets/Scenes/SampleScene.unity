@@ -331,6 +331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ork
       objectReference: {fileID: 0}
+    - target: {fileID: 7680598467188815443, guid: ededf119afdbca44c8bfb41e29bd7ec0, type: 3}
+      propertyPath: m_Name
+      value: Ork Sprite
+      objectReference: {fileID: 0}
     - target: {fileID: 8587038011844685781, guid: ededf119afdbca44c8bfb41e29bd7ec0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.04
@@ -803,6 +807,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1668978998905485829, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ee3fbe86684d8fb40a8b3c69a45072f6, type: 2}
     - target: {fileID: 3250063734318529366, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
       propertyPath: m_Speed
       value: 2
@@ -863,7 +871,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5948827642772632469, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+      propertyPath: m_Name
+      value: Blood Monster Sprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203441483490423930, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1398106853}
+    m_RemovedComponents:
+    - {fileID: 4145052043285052549, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+    - {fileID: 99482939274131222, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -900,6 +918,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2395895218313619333, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1225871132}
     - target: {fileID: 3130228583928662030, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9245958
@@ -955,6 +977,10 @@ PrefabInstance:
     - target: {fileID: 3510040151702719183, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255072109202761581, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
+      propertyPath: m_Name
+      value: Demon Sprite
       objectReference: {fileID: 0}
     - target: {fileID: 7779728831814543992, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
       propertyPath: m_Name
@@ -2183,6 +2209,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!95 &1225871132 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7066013615805123665, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
+  m_PrefabInstance: {fileID: 666160352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1279190276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,6 +2639,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377151762}
   m_CullTransparentMesh: 1
+--- !u!95 &1398106853 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1668978998905485829, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+  m_PrefabInstance: {fileID: 653977384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1493978101
 GameObject:
   m_ObjectHideFlags: 0
