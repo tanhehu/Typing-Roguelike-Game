@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.AI;
 
 public class EnemyBase : AllCharacterBase, IDropPowerup
 {
@@ -16,15 +17,33 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
 
+    [SerializeField] Transform target;
+
+    NavMeshAgent agent;
+
     public override void Start()
     {
         base.Start();
         this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
+        agent = GetComponent<NavMeshAgent>();
+        //agent.updateRotation = false;
+        //agent.updateUpAxis = false;
+
+        target = Player.Instance.transform;
+        Debug.Log(transform);
     }
 
     public override void Update()
     {
         base.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        if (agent.enabled)
+        {
+            agent.SetDestination(target.position);
+        }
     }
 
     #region Base
@@ -104,8 +123,8 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
         enemy.speed = speed;
     }
 
-    public void SetPowerupChance(EnemyBase enemy, int chance)
+    public void SetPowerupChance(EnemyBase enemy, bool drop)
     {
-        enemy.dropChance = chance;
+        enemy.drop = drop;
     }
 }
