@@ -57,10 +57,11 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     public override void OnDeath()
     {
         TutorialController tutorial = TutorialController.Instance;
-        if (tutorial != null)
-        {
-            tutorial.killCount++;
-        }
+        if (tutorial != null) tutorial.killCount++;
+
+        GolemBossController golem = GolemBoss.Instance;
+        if (golem != null) golem.waveCount--;
+
         StartCoroutine(OnDeathCoroutine());
     }
 

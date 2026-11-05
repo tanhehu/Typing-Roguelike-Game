@@ -1798,8 +1798,14 @@ MonoBehaviour:
   isFacingRight: 1
   isAttacking: 0
   animator: {fileID: 1148325967}
-  range: 5
+  range: 3.5
   damage: 0
+  bulletPrb: {fileID: 1112081548328048077, guid: d79635465dd357248aa1c86a17750260, type: 3}
+  ork: {fileID: 8015617695686323216, guid: ededf119afdbca44c8bfb41e29bd7ec0, type: 3}
+  demon: {fileID: 2395895218313619333, guid: 36fbc53e83fef6b4cbcd0b85e62ad646, type: 3}
+  bloodMonster: {fileID: 6203441483490423930, guid: 01da46dd151d71e4e879aff7aa8a16ae, type: 3}
+  hasSpawn: 0
+  health: 3
 --- !u!95 &1148325967
 Animator:
   serializedVersion: 5
@@ -1828,7 +1834,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148325963}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
