@@ -8,6 +8,7 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
 {
     [Header("Combat")]
     [SerializeField] private float range;
+    public float Range => range;
     public float damage;
 
     public int dropChance { get; set; }
@@ -20,11 +21,6 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     {
         base.Start();
         this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
-    }
-
-    public override void Update()
-    {
-        base.Update();
     }
 
     #region Base

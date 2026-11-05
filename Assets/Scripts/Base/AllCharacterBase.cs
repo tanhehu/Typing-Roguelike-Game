@@ -11,6 +11,7 @@ public abstract class AllCharacterBase : MoveController, IDeath, IWordHolder
 
     [Header("References")]
     [SerializeField] protected Animator animator;
+    public Animator Animator => animator;
 
     public WordController word { get; set; }
     public Vector3 wordOffset { get; set; } = new Vector3(0, 1, 0);

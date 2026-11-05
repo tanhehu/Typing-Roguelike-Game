@@ -13,7 +13,7 @@ public class WaveController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == Player.Instance.gameObject.layer)
+        if(collision.gameObject.layer == (int)LayerMask.Player)
         {
             for(int i = 0; i < waveCount; i++)
             {
