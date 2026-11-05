@@ -8,4 +8,9 @@ public class CreateController : SingletonMonobehaviour<CreateController>
     {
         return Instantiate<T>(prefab);
     }
+
+    public T Create<T>(T prefab, Vector3 position) where T : MonoBehaviour
+    {
+        return Instantiate<T>(prefab, position, Quaternion.identity);
+    }
 }

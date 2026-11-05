@@ -21,16 +21,18 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
 
     NavMeshAgent agent;
 
+    public void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
+
     public override void Start()
     {
         base.Start();
-        this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
-        agent = GetComponent<NavMeshAgent>();
-        //agent.updateRotation = false;
-        //agent.updateUpAxis = false;
-
+        agent.speed = UnityEngine.Random.Range(2, 4);                          // Vary enemies speed
         target = Player.Instance.transform;
-        Debug.Log(transform);
     }
 
     public override void Update()
@@ -49,8 +51,8 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     #region Base
     public override void Move()
     {
-        Direction = distance;
-        base.Move();
+        //Direction = distance;
+        //base.Move();
     }
     public override void Attack()
     {

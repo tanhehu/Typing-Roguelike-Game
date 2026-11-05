@@ -43,7 +43,6 @@ public class PlayerController : AllCharacterBase
 
     public override void Move()
     {
-        transform.rotation = Quaternion.identity;
         if(!disableInput)
         {
             inputX = Input.GetAxis("Horizontal");
@@ -166,7 +165,7 @@ public class PlayerController : AllCharacterBase
     {
         if (collision.gameObject.layer == (int)LayerMask.Enemy)                                         // Check if collide with enemy
         {
-            OnHit(collision.gameObject.GetComponent<EnemyBase>().damage);                      // Retrieve enemy damage
+            OnHit(collision.gameObject.GetComponentInParent<EnemyBase>().damage);                      // Retrieve enemy damage
         }
     }
 
