@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TutorialController : SingletonMonobehaviour<TutorialController>
 {
@@ -24,8 +25,12 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
 
     private void Start()
     {
-        StartCoroutine(SetEnemySpeed(SpawnEnemy(spawnPos1)));
-        StartCoroutine(SetEnemySpeed(SpawnEnemy(spawnPos2)));
+        EnemyBase e1 = SpawnEnemy(spawnPos1);
+        EnemyBase e2 = SpawnEnemy(spawnPos2);
+        e1.GetComponent<NavMeshAgent>().isStopped = true;
+        e2.GetComponent<NavMeshAgent>().isStopped = true;
+        StartCoroutine(SetEnemySpeed(e1));
+        StartCoroutine(SetEnemySpeed(e2));
     }
 
     void Update()
@@ -74,6 +79,7 @@ public class TutorialController : SingletonMonobehaviour<TutorialController>
         EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrb);
         enemy.SetPowerupChance(enemy, false);
         enemy.transform.position = pos.transform.position;
+;
         return enemy;
     }
 

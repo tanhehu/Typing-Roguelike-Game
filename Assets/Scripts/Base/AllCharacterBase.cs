@@ -29,6 +29,7 @@ public abstract class AllCharacterBase : MoveController, IDeath, IWordHolder
 
     public virtual void Start()
     {
+        transform.rotation = Quaternion.identity;
         SpawnWord();
     }
 

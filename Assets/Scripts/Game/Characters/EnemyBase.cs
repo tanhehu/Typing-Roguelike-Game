@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.AI;
 
 public class EnemyBase : AllCharacterBase, IDropPowerup
 {
@@ -17,17 +18,29 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     private Vector3 playerPos => Player.Instance.transform.position;
     private Vector3 distance => playerPos - transform.position;
 
+    [SerializeField] Transform target;
+
+    NavMeshAgent agent;
+
+    public void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
+
     public override void Start()
     {
         base.Start();
-        this.speed = UnityEngine.Random.Range(0.1f, 0.4f);                          // Vary enemies speed
+        agent.speed = UnityEngine.Random.Range(2, 4);                          // Vary enemies speed
+        target = Player.Instance.transform;
     }
 
     #region Base
     public override void Move()
     {
-        Direction = distance;
-        base.Move();
+        //Direction = distance;
+        //base.Move();
     }
     public override void Attack()
     {
