@@ -30,6 +30,9 @@ public class PlayerController : AllCharacterBase
     public override void Start()
     {
         base.Start();
+        string json = PlayerPrefs.GetString("Speed");
+        SpeedData data = JsonUtility.FromJson<SpeedData>(json);
+        speed = data.speed;
     }
 
     public override void Update()

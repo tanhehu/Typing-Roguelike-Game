@@ -13,6 +13,7 @@ public class WaveController : MonoBehaviour
     public List<EnemyBase> enemyPrefabs;
     public List<GameObject> spawners;
     public int waveNum;
+    private bool hasSpawn = false;
 
     private void Awake()
     {
@@ -25,24 +26,29 @@ public class WaveController : MonoBehaviour
     {
         if(collision.gameObject.layer == (int)LayerMask.Player)
         {
-            for(int i = 0; i < waveCount; i++)
-            {
-                int random = UnityEngine.Random.Range(0, spawnerList.Capacity);
-                StartCoroutine(SpawnEnemyCoroutine(spawnerList[random].transform.position));
-            }
+            if (hasSpawn) return;
+
+            SpawnEnemy(waveCount);
+            hasSpawn = true;
         }
     }
 
-    private IEnumerator SpawnEnemyCoroutine(Vector3 pos)
+    private IEnumerator SpawnEnemyCoroutine(Vector3 pos, float timer)
     {
-        yield return new WaitForSeconds(1f);
-        SpawnEnemy(pos, 1);
-    }
-
-    public void SpawnEnemy(Vector3 pos, int amount)
-    {
+        yield return new WaitForSeconds(timer);
         int random = UnityEngine.Random.Range(0, enemyPrefabList.Capacity);
         EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrefabList[random]);
         enemy.transform.position = pos;
+    }
+
+    public void SpawnEnemy(int amount)
+    {
+        float timer = 0;
+        for (int i = 0; i < amount; i++)
+        {
+            int random = UnityEngine.Random.Range(0, spawnerList.Capacity);
+            StartCoroutine(SpawnEnemyCoroutine(spawnerList[random].transform.position, timer));
+            timer++;
+        }
     }
 }

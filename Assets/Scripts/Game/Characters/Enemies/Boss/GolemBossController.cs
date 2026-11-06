@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GolemBoss : SingletonMonobehaviour<GolemBossController> { }
 
@@ -17,7 +18,9 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
     [SerializeField] private EnemyBase bloodMonster;
     public bool hasSpawn = false;
     public int health = 3;
+    public List<GameObject> spawnerList;
 
+    public override void Awake() { }
     public override void Start()
     {
         base.Start();
@@ -28,6 +31,7 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
         enemyPrefabList.Add(ork);
         enemyPrefabList.Add(demon);
         enemyPrefabList.Add(bloodMonster);
+        spawnerList = WordList.Instance.bossSpawnEnemy;
     }
 
     public override void Update()
@@ -67,13 +71,14 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
         word.DisableWord();
     }
 
-    public void SpawnEnemy(Vector3 pos, int amount)
+    public void SpawnEnemy(int amount)
     {
         float timer = 0;
         waveCount = amount;
         for (int i = 0; i < waveCount; i++)
         {
-            StartCoroutine(SpawnEnemyDelay(pos, timer));
+            int random = UnityEngine.Random.Range(0, spawnerList.Capacity - 1);
+            StartCoroutine(SpawnEnemyDelay(spawnerList[random].transform.position, timer));
             timer += UnityEngine.Random.Range(1f, 2f);
         }
     }
@@ -94,13 +99,13 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
     {
         yield return new WaitForSeconds(time);
 
-        int distance = UnityEngine.Random.Range(-15, 15);
-        if (distance < 8 && distance >= 0) distance = 8;
-        else if (distance > -8 && distance < 0) distance = -8;
-
         int random = UnityEngine.Random.Range(0, enemyPrefabList.Capacity - 1);
         EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrefabList[random]);
-        enemy.transform.position = pos + new Vector3(distance,distance, 0);
+        var agent = enemy.GetComponent<NavMeshAgent>();
+        if (agent != null)
+            agent.Warp(pos);              // places the agent on the NavMesh at pos
+        else
+            enemy.transform.position = pos;
     }
 
     public void Shoot()
@@ -108,17 +113,17 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
         float shootTimeDelay = 0;
         for(int i = 0; i < 4; i++)
         {
-            StartCoroutine(BulletDelay(shootTimeDelay));
+            StartCoroutine(BulletDelay(Player.Instance.transform.position, shootTimeDelay));
             shootTimeDelay += UnityEngine.Random.Range(0.5f, 1);
         }
         ChangeState(new GolemBossIdleWalkState(this));
     }
 
-    private IEnumerator BulletDelay(float time)
+    private IEnumerator BulletDelay(Vector3 pos, float time)
     {
         yield return new WaitForSeconds(time);
         MoveController bullet = CreateController.Instance.Create<BulletController>(bulletPrb);
-        bullet.transform.position += new Vector3(-10, UnityEngine.Random.Range(-8, 8), 0);
+        bullet.transform.position = pos + new Vector3(-10, UnityEngine.Random.Range(-8, 8), 0);
         bullet.Direction = Vector3.right;
     }
 }

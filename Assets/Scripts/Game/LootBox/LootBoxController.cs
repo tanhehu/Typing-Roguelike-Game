@@ -37,7 +37,7 @@ public class LootBoxController : MonoBehaviour, IWordHolder, IDropPowerup
 
     public void OnHit(float damage = 0)
     {
-        animator.Play("OrkDeath");
+        animator.SetTrigger("Open");
         destroy?.Invoke();
     }
 

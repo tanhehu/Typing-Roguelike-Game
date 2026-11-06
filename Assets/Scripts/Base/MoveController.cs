@@ -8,6 +8,8 @@ public class MoveController : MonoBehaviour
     [Header("Move")]
     [SerializeField] protected float speed;
 
+    public float Speed { get => speed; set => speed = value; } 
+
     public Vector3 Direction
     {
         get

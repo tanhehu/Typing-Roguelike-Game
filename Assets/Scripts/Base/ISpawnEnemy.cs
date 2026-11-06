@@ -8,5 +8,5 @@ public interface ISpawnEnemy
     List<EnemyBase> enemyPrefabList { get; set; }
     List<GameObject> spawners { get; set; }
 
-    void SpawnEnemy(Vector3 pos, int amount);
+    void SpawnEnemy(int amount);
 }

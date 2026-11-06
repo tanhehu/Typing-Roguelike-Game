@@ -8,8 +8,7 @@ using UnityEngine.AI;
 public class EnemyBase : AllCharacterBase, IDropPowerup
 {
     [Header("Combat")]
-    [SerializeField] private float range;
-    public float Range => range;
+    public float range;
     public float damage;
 
     public int dropChance { get; set; }
@@ -22,7 +21,7 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
 
     NavMeshAgent agent;
 
-    public void Awake()
+    public virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -32,8 +31,26 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     public override void Start()
     {
         base.Start();
-        agent.speed = UnityEngine.Random.Range(2, 4);                          // Vary enemies speed
+        if(agent != null)
+        {
+            agent.speed = UnityEngine.Random.Range(1, 2);                          // Vary enemies speed
+        }
         target = Player.Instance.transform;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        if (agent == null) return;
+
+        if (agent.enabled)
+        {
+            agent.SetDestination(target.position);
+        }
     }
 
     #region Base

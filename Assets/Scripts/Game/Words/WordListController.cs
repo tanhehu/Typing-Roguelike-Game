@@ -32,6 +32,8 @@ public class WordListController : MonoBehaviour
 
     public Buff buff = Buff.None;
 
+    public List<GameObject> bossSpawnEnemy;
+
     private void Awake()
     {
         foreach (var word in wordList)
@@ -45,11 +47,11 @@ public class WordListController : MonoBehaviour
         List<IWordHolder> holderList = wordDictionary[word];
         for (int i = 0; i < holderList.Count; i++)
         {
-            if (holderList[0].word.Disabled) { Debug.Log("Imvulnerable"); continue; };
+            if (holderList[0].word.Disabled) continue;
 
-            var enemy = holderList[0];
-            enemy.OnHit(0);                    
-            holderList.Remove(enemy);
+            var holder = holderList[0];
+            holder.OnHit(0);                    
+            holderList.Remove(holder);
         }
     }
 

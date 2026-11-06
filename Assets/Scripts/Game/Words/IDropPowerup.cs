@@ -11,8 +11,8 @@ public interface IDropPowerup
 
 public enum DropChance
 {
-    Ork = 20,
-    BloodMonster = 15,
-    Demon = 30,
-    LootBox = 50
+    Ork = 30,
+    BloodMonster = 25,
+    Demon = 40,
+    LootBox = 70
 }

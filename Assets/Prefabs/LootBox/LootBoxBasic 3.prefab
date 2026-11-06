@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8456508914825567119}
   - component: {fileID: 4622453070103476511}
   - component: {fileID: -7292353964169881957}
+  - component: {fileID: 9213089839343079629}
   m_Layer: 0
-  m_Name: LootBox
+  m_Name: LootBoxBasic 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 939315308, guid: 673fb4086e781c74ca2793a62b954c14, type: 3}
+  m_Sprite: {fileID: -1873283348, guid: 32ac6a2a53771b84093829718e1d0e7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9213089839343079629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5973133865064571827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c236ae51b736944596f54ae372d5b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -49,7 +49,7 @@ public class GolemBossIdleWalkState : GolemBossState
 
     public override void Update()
     {
-        if (distance < golem.Range)
+        if (distance < golem.range)
         {
             golem.ChangeState(new GolemBossMeleeState(golem));
         }
@@ -62,7 +62,7 @@ public class GolemBossIdleWalkState : GolemBossState
 
                 if (random == 0 && !golem.hasSpawn)
                 {
-                    golem.SpawnEnemy(playerPos, UnityEngine.Random.Range(2, 6));
+                    golem.SpawnEnemy(UnityEngine.Random.Range(2, 6));
                     golem.hasSpawn = true;
                 }
                 else golem.ChangeState(new GolemBossRangedState(golem));
@@ -96,7 +96,7 @@ public class GolemBossMeleeState : GolemBossState
 
     public override void Update()
     {
-        if(distance > golem.Range)
+        if(distance > golem.range)
         {
             golem.ChangeState(new GolemBossIdleWalkState(golem));
         }
