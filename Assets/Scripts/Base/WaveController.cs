@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -5,52 +6,43 @@ using UnityEngine;
 
 public class WaveController : MonoBehaviour
 {
-    public int waveCount;
-    private bool triggeredOnce = false;
-    public List<EnemyBase> enemyPrefabList;
-    public List<GameObject> spawners;
+    public int waveCount { get; set; }
+    public List<EnemyBase> enemyPrefabList { get; set; }
+    public List<GameObject> spawnerList { get; set; }
     private Vector3 playerPos => Player.Instance.transform.position;
-    private bool spawnReady = true;
-    private bool spawnFlag = false;
-    private int spawnCount = 0;
+    public List<EnemyBase> enemyPrefabs;
+    public List<GameObject> spawners;
+    public int waveNum;
 
-    private void Update()
+    private void Awake()
     {
-        if (triggeredOnce) return;
-
-        if(spawnFlag)
-        {
-            if(spawnReady)
-            {
-                int random = UnityEngine.Random.Range(0, spawners.Capacity);
-                StartCoroutine(SpawnEnemy(spawners[random].transform.position));
-                spawnCount++;
-                spawnReady = false;
-            }
-
-            if (spawnCount == waveCount)
-            {
-                spawnCount = 0;
-                spawnFlag = false;
-                triggeredOnce = true;
-            }
-        }
+        enemyPrefabList = enemyPrefabs;
+        spawnerList = spawners;
+        waveCount = waveNum;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == Player.Instance.gameObject.layer)
+        if(collision.gameObject.layer == (int)LayerMask.Player)
         {
-            spawnFlag = true;
+            for(int i = 0; i < waveCount; i++)
+            {
+                int random = UnityEngine.Random.Range(0, spawnerList.Capacity);
+                StartCoroutine(SpawnEnemyCoroutine(spawnerList[random].transform.position));
+            }
         }
     }
 
-    private IEnumerator SpawnEnemy(Vector3 pos)
+    private IEnumerator SpawnEnemyCoroutine(Vector3 pos)
+    {
+        yield return new WaitForSeconds(1f);
+        SpawnEnemy(pos, 1);
+    }
+
+    public void SpawnEnemy(Vector3 pos, int amount)
     {
         int random = UnityEngine.Random.Range(0, enemyPrefabList.Capacity);
-        yield return new WaitForSeconds(0.5f);
-        EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrefabList[random], pos);
+        EnemyBase enemy = CreateController.Instance.Create<EnemyBase>(enemyPrefabList[random]);
         enemy.transform.position = pos;
-        spawnReady = true;
     }
 }

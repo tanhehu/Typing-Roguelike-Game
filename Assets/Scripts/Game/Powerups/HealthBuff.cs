@@ -6,6 +6,9 @@ using UnityEngine;
 public class HealthBuff : PowerupEffectBase
 {
     public float healthBuff;
+
+    protected HealthBuff(Buff type) : base(type) { }
+
     public override void ApplyEffect(PlayerController player)
     {
         player.health += healthBuff;

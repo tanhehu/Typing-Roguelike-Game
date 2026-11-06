@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7de54555665203489ad313b021658f4, type: 3}
   m_Name: Buff Trim Letter First Two
   m_EditorClassIdentifier: 
+  type: 3
   duration: 10
-  trimPos: 0

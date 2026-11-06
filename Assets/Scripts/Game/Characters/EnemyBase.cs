@@ -9,6 +9,7 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
 {
     [Header("Combat")]
     [SerializeField] private float range;
+    public float Range => range;
     public float damage;
 
     public int dropChance { get; set; }
@@ -33,19 +34,6 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
         base.Start();
         agent.speed = UnityEngine.Random.Range(2, 4);                          // Vary enemies speed
         target = Player.Instance.transform;
-    }
-
-    public override void Update()
-    {
-        base.Update();
-    }
-
-    private void FixedUpdate()
-    {
-        if (agent.enabled)
-        {
-            agent.SetDestination(target.position);
-        }
     }
 
     #region Base
@@ -82,10 +70,11 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     public override void OnDeath()
     {
         TutorialController tutorial = TutorialController.Instance;
-        if (tutorial != null)
-        {
-            tutorial.killCount++;
-        }
+        if (tutorial != null) tutorial.killCount++;
+
+        GolemBossController golem = GolemBoss.Instance;
+        if (golem != null) golem.waveCount--;
+
         StartCoroutine(OnDeathCoroutine());
     }
 

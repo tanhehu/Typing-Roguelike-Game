@@ -14,9 +14,10 @@ public class WordList : SingletonMonobehaviour<WordListController>
 public enum Buff
 {
     None,
+    SlowTime,
     RemoveCase,
-    TrimLetterFirst,
-    TrimLetterLast
+    TrimFirstTwo,
+    TrimLastTwo
 }
 
 public class WordListController : MonoBehaviour
@@ -41,11 +42,14 @@ public class WordListController : MonoBehaviour
 
     private void DestroyTarget(string word)                                  // Trigger all enemy bearing the word death and word destroy
     {
-        while (wordDictionary[word].Count > 0)
+        List<IWordHolder> holderList = wordDictionary[word];
+        for (int i = 0; i < holderList.Count; i++)
         {
-            var enemy = wordDictionary[word][0];
+            if (holderList[0].word.Disabled) { Debug.Log("Imvulnerable"); continue; };
+
+            var enemy = holderList[0];
             enemy.OnHit(0);                    
-            wordDictionary[word].Remove(enemy);
+            holderList.Remove(enemy);
         }
     }
 
@@ -90,7 +94,7 @@ public void WordCheck(string str)                                          // De
                 }
                 break;
 
-            case Buff.TrimLetterFirst:                                              // Or if trim first two letters is on effect
+            case Buff.TrimFirstTwo:                                              // Or if trim first two letters is on effect
                 for (int i = 0; i < wordList.Count; i++)
                 {
                     if (wordList[i].Substring(2) == str)
@@ -101,7 +105,7 @@ public void WordCheck(string str)                                          // De
                 }
                 break;
 
-            case Buff.TrimLetterLast:                                                // Or if trim last two letters is on effect
+            case Buff.TrimLastTwo:                                                // Or if trim last two letters is on effect
                 for (int i = 0; i < wordList.Count; i++)
                 {
                     if (wordList[i].Substring(0, wordList[i].Length - 2) == str)
