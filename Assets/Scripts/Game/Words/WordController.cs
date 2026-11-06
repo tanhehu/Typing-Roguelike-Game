@@ -9,6 +9,8 @@ public class WordController : MonoBehaviour
     public Text text;
     public IWordHolder holder;
     private Vector3 pos => holder.GameObject().transform.position;
+    private bool disabled;
+    public bool Disabled => disabled;
 
     private void Start()
     {
@@ -18,6 +20,18 @@ public class WordController : MonoBehaviour
     private void Update()
     {
         transform.position = Camera.main.WorldToScreenPoint(pos + holder.wordOffset);       // Set and translate canvas to Screen (UI) position that follow the target + offset
+    }
+
+    public void EnableWord()
+    {
+        disabled = false;
+        image.color = Color.white;
+    }
+
+    public void DisableWord()
+    {
+        disabled = true;
+        image.color = Color.grey;
     }
 
     public void Destroy()

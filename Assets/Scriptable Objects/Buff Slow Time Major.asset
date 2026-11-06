@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bc7ff23aa96374d9930a0b919103e5, type: 3}
   m_Name: Buff Slow Time Major
   m_EditorClassIdentifier: 
+  type: 1
   duration: 10
   SlowTimeFactor: 0.5

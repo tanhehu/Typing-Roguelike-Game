@@ -21,6 +21,7 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
     public override void Start()
     {
         base.Start();
+        word.DisableWord();
         ChangeState(new GolemBossSpawnState(this));
         wordOffset = new Vector3(0, 2, 0);
 
@@ -55,14 +56,15 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
     }
 
     public override void OnHit(float damage = 0) 
-    { 
-        if (health > 1)
-        {
-            health--;
-            word.Destroy();
-            ChangeState(new GolemBossIdleWalkState(this));
-        }
-        else destroy?.Invoke();
+    {
+        if (health > 1) ChangeState(new GolemBossIdleWalkState(this));
+        else { ChangeState(new GolemBossDeathState(this)); destroy?.Invoke(); }
+    }
+
+    public void Recover()
+    {
+        SpawnWord();
+        word.DisableWord();
     }
 
     public void SpawnEnemy(Vector3 pos, int amount)
@@ -83,15 +85,9 @@ public class GolemBossController : EnemyBase, ISpawnEnemy
 
     private IEnumerator OnWinCoroutine()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         gameObject.SetActive(false);
         MenuController.Instance.OnWin();
-    }
-
-    public IEnumerator Recover()
-    {
-        yield return new WaitForSeconds(1);
-        SpawnWord();
     }
 
     private IEnumerator SpawnEnemyDelay(Vector3 pos, float time)

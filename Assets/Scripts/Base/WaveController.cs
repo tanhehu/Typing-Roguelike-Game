@@ -4,13 +4,22 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class WaveController : MonoBehaviour, ISpawnEnemy
+public class WaveController : MonoBehaviour
 {
     public int waveCount { get; set; }
     public List<EnemyBase> enemyPrefabList { get; set; }
-    public List<GameObject> spawners { get; set; }
+    public List<GameObject> spawnerList { get; set; }
     private Vector3 playerPos => Player.Instance.transform.position;
+    public List<EnemyBase> enemyPrefabs;
+    public List<GameObject> spawners;
+    public int waveNum;
 
+    private void Awake()
+    {
+        enemyPrefabList = enemyPrefabs;
+        spawnerList = spawners;
+        waveCount = waveNum;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,8 +27,8 @@ public class WaveController : MonoBehaviour, ISpawnEnemy
         {
             for(int i = 0; i < waveCount; i++)
             {
-                int random = UnityEngine.Random.Range(0, spawners.Capacity);
-                StartCoroutine(SpawnEnemyCoroutine(spawners[random].transform.position));
+                int random = UnityEngine.Random.Range(0, spawnerList.Capacity);
+                StartCoroutine(SpawnEnemyCoroutine(spawnerList[random].transform.position));
             }
         }
     }

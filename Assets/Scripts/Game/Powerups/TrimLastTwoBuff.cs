@@ -3,26 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Powerups/Trim Letter")]
-public class TrimLetterBuff : PowerupEffectBase
+public class TrimLastTwoBuff : PowerupEffectBase
 {
-    public TrimType trimPos;
-
-    public enum TrimType
-    {
-        first,
-        last
-    }
+    protected TrimLastTwoBuff(Buff type) : base(type) { }
 
     public override void ApplyEffect(PlayerController player)
     {
-        if(trimPos == TrimType.first)
-        {
-            WordList.Instance.buff = Buff.TrimLetterFirst;
-        }
-        else if(trimPos == TrimType.last)
-        {
-            WordList.Instance.buff = Buff.TrimLetterLast;
-        }
+        WordList.Instance.buff = Buff.TrimLastTwo;
         base.ApplyEffect(player);
     }
 

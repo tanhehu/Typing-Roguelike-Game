@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public abstract class GolemBossState
@@ -73,6 +74,7 @@ public class GolemBossIdleWalkState : GolemBossState
             {
                 golem.ChangeState(new GolemBossWeakState(golem));
                 golem.hasSpawn = false;
+                golem.waveCount = 100000;
             }
         }
     }
@@ -128,14 +130,15 @@ public class GolemBossWeakState : GolemBossState
     public override void Enter()
     {
         animator.SetBool("Weak", true);
+        golem.word.EnableWord();
     }
 
     public override void Exit()
     {
-        animator.Play("GolemBossRecovery", 0, 1f);
         animator.SetBool("Weak", false);
-        Debug.Log("Recover");
-        golem.StartCoroutine(golem.Recover());   
+
+        golem.health--;
+        golem.word.Destroy();
     }
 }
 
@@ -145,16 +148,6 @@ public class GolemBossDeathState : GolemBossState
 
     public override void Enter()
     {
-
-    }
-
-    public override void Update()
-    {
-
-    }
-
-    public override void Exit()
-    {
-
+        animator.SetBool("Death", true);
     }
 }

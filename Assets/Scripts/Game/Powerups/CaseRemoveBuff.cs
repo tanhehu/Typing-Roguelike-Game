@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Powerups/CaseRemoveBuff")]
 public class CaseRemoveBuff : PowerupEffectBase
 {
+    protected CaseRemoveBuff(Buff type) : base(type) { }
     public override void ApplyEffect(PlayerController player)
     {
         WordList.Instance.buff = Buff.RemoveCase;

@@ -6,6 +6,9 @@ using UnityEngine;
 public class SlowTimeBuff : PowerupEffectBase
 {
     public float SlowTimeFactor;
+
+    protected SlowTimeBuff(Buff type) : base(type) { }
+
     public override void ApplyEffect(PlayerController player)
     {
         Time.timeScale = SlowTimeFactor;

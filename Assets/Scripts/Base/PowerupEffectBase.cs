@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PowerupEffectBase : ScriptableObject
 {
+    public Buff type;
     public float duration;
+
+    protected PowerupEffectBase(Buff type) { this.type = type; }
+
     public virtual void ApplyEffect(PlayerController player)
     {
 

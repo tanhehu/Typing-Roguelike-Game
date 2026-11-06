@@ -30,4 +30,23 @@ public class PowerupUIDisplay : SingletonMonobehaviour<PowerupUIDisplay>
     {
         powerupUIList.Remove(powerupUI);
     }
+
+    public string Display(Buff type)
+    {
+        switch(type)
+        {
+            case Buff.RemoveCase:
+                return "Allow removing case sensitive";
+            case Buff.SlowTime:
+                return "Time slow down";
+            case Buff.TrimFirstTwo:
+                return "Allow skipping first 2 letters";
+            case Buff.TrimLastTwo:
+                return "Allow skipping last 2 letters";
+            case Buff.None:
+                return "";
+            default:
+                return "";
+        }
+    }
 }
