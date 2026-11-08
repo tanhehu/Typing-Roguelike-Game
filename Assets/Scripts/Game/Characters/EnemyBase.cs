@@ -101,10 +101,10 @@ public class EnemyBase : AllCharacterBase, IDropPowerup
     {
         yield return new WaitForSeconds(1);
         PowerupController powerup;
-        if (drop)
+        if (drop)                                                                               
         {
             powerup = PowerupListController.Instance.SpawnPowerup();                            // Spawn powerup
-            powerup.transform.position = this.transform.position;                               // Set powerup position to enemy death position
+            if (powerup != null) { powerup.transform.position = this.transform.position; }                             // Set powerup position to enemy death position}
         }
         this.gameObject.SetActive(false);
     }

@@ -14,6 +14,7 @@ public class WordController : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(holder);
         holder.destroy += Destroy;                     // Add destroy function to event trigger
     }
 

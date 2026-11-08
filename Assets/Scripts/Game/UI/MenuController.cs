@@ -21,6 +21,7 @@ public class MenuController : SingletonMonobehaviour<MenuController>
             child.gameObject.SetActive(true);
         }
         this.transform.GetChild(0).gameObject.SetActive(false);
+        this.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     public void OnContinue()
@@ -49,6 +50,7 @@ public class MenuController : SingletonMonobehaviour<MenuController>
         {
             child.gameObject.SetActive(true);
         }
+        transform.GetChild(1).gameObject.SetActive(false);
         transform.GetChild(2).gameObject.SetActive(false);
     }
 

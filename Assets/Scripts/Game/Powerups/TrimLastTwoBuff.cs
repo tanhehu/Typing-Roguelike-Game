@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Powerups/Trim Letter")]
+[CreateAssetMenu(menuName = "Powerups/Trim Letter Last Two")]
 public class TrimLastTwoBuff : PowerupEffectBase
 {
     protected TrimLastTwoBuff(Buff type) : base(type) { }

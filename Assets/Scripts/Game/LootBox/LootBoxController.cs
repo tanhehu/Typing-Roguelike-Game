@@ -57,7 +57,7 @@ public class LootBoxController : MonoBehaviour, IWordHolder, IDropPowerup
         if (drop)
         {
             powerup = PowerupListController.Instance.SpawnPowerup();                            // Spawn powerup
-            powerup.transform.position = this.transform.position;                               // Set powerup position to enemy death position
+            if (powerup != null) powerup.transform.position = this.transform.position;                               // Set powerup position to enemy death position
         }
         gameObject.SetActive(false);
     }
